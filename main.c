@@ -21,7 +21,6 @@ ble_t                                        m_ble                              
 
 
 
-
 #define APP_GPIOTE_MAX_USERS                 3                                          /**< Maximum number of users of the GPIOTE handler. */
 
 #define APP_TIMER_PRESCALER                  0
