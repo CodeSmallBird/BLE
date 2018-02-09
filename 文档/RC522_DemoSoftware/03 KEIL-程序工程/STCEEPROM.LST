@@ -1,0 +1,89 @@
+C51 COMPILER V9.00   STCEEPROM                                                             03/20/2017 09:46:32 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE STCEEPROM
+OBJECT MODULE PLACED IN STCEEPROM.OBJ
+COMPILER INVOKED BY: D:\SOFT\keil\C51\BIN\C51.EXE STCEEPROM.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include "STCEEPROM.h"
+   2          
+   3          #define ISP_BYTE_READ    1              //ISP字节读
+   4          #define ISP_BYTE_PROGRAM 2              //ISP直接编程
+   5          #define ISP_SECTOR_ERASE 3              //ISP扇区擦除
+   6          
+   7          /********************************************************************
+   8          * 名称 : ISP_ERASE()
+   9          * 功能 : EEPROM的扇区擦除
+  10          * 输入 : Address（擦除扇区的地址)
+  11          * 输出 : 无
+  12          ***********************************************************************/
+  13          void ISP_ERASE(Address)
+  14          {
+  15   1              ISP_ADDRL = Address;
+  16   1              ISP_ADDRH = Address >> 8;
+  17   1              ISP_CONTR = 0x81;                               
+  18   1              ISP_CMD = ISP_SECTOR_ERASE;     
+  19   1              ISP_TRIG = 0x46;        //PDF手册中说先像 ISP_TRIG 中写入 0x46, 然后写入 0xb9
+  20   1              ISP_TRIG = 0xb9;
+  21   1              _nop_();
+  22   1              _nop_();        
+  23   1      }
+  24          
+  25          /********************************************************************
+  26          * 名称 : ISP_READ()
+  27          * 功能 : 从EEPROM相应的地址中读出值
+  28          * 输入 : Address(想要读取EEPROM的地址）
+  29          * 输出 : Read_Data（从EEPROM读出的值）
+  30          *********************************************************************/
+  31          unsigned int ISP_READ(Address)
+  32          {
+  33   1              unsigned char Read_Data;
+  34   1              ISP_ADDRL = Address;
+  35   1              ISP_ADDRH = Address >> 8;
+  36   1              EA = 0; 
+  37   1              ISP_CONTR = 0x81;
+  38   1              ISP_CMD = ISP_BYTE_READ;
+  39   1              ISP_TRIG = 0x46;
+  40   1              ISP_TRIG = 0xb9;
+  41   1              _nop_();
+  42   1              _nop_();
+  43   1              Read_Data = ISP_DATA;
+  44   1              return Read_Data;       
+  45   1      }
+  46          
+  47          /********************************************************************
+  48          * 名称 : ISP_PROGRAM()
+  49          * 功能 : 实现EEPROM的字节编程
+  50          * 输入 : Address为编程的地址，Data_temp为想要编程的值
+  51          * 输出 : 无
+  52          ***********************************************************************/
+  53          void ISP_PROGRAM(Address, Data_temp)
+  54          {
+  55   1              ISP_DATA = Data_temp;
+C51 COMPILER V9.00   STCEEPROM                                                             03/20/2017 09:46:32 PAGE 2   
+
+  56   1              ISP_ADDRL = Address;
+  57   1              ISP_ADDRH = Address >> 8;
+  58   1              ISP_CONTR = 0x81;
+  59   1              ISP_CMD = ISP_BYTE_PROGRAM;
+  60   1              ISP_TRIG = 0x46;
+  61   1              ISP_TRIG = 0xb9;
+  62   1              _nop_();
+  63   1              _nop_();        
+  64   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     71    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

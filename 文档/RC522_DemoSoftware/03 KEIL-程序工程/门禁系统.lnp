@@ -1,0 +1,7 @@
+"MAIN.obj",
+"RC522.obj",
+"KEY4X4.obj",
+"LCD1602.obj",
+"STCEEPROM.obj" 
+TO "ÃÅ½ûÏµÍ³" 
+RAMSIZE(256) 

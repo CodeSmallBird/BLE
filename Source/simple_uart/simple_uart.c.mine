@@ -1,0 +1,347 @@
+/* Copyright (c) 2009 Nordic Semiconductor. All Rights Reserved.
+ *
+ * The information contained herein is property of Nordic Semiconductor ASA.
+ * Terms and conditions of usage are described in detail in NORDIC
+ * SEMICONDUCTOR STANDARD SOFTWARE LICENSE AGREEMENT.
+ *
+ * Licensees are granted free, non-transferable use of the information. NO
+ * WARRANTY of ANY KIND is provided. This heading must NOT be removed from
+ * the file.
+ *
+ */
+
+#include <stdint.h>
+#include "app_util.h"
+#include "nrf.h"
+#include "simple_uart.h"
+#include "nrf_delay.h"
+#include "nrf_gpio.h"
+#include "stdio.h"
+#include	"string.h"
+#include "nrf_delay.h"
+#include "simple_uart.h"
+#include "pstorage.h"
+#include "ble_service.h"
+//////////////////////////
+
+int fputc(int ch, FILE *f)
+{
+        NRF_UART0->TXD = (uint8_t) ch;
+
+
+  while (NRF_UART0->EVENTS_TXDRDY!=1)
+  {
+    // Wait for TXD data to be sent
+                
+  }
+
+  NRF_UART0->EVENTS_TXDRDY=0;
+        return ch;
+}
+
+
+
+
+
+
+/////////////////////////
+uint8_t simple_uart_get(void)
+{
+  while (NRF_UART0->EVENTS_RXDRDY != 1)
+  {
+    // Wait for RXD data to be received
+  }
+  
+  NRF_UART0->EVENTS_RXDRDY = 0;
+  return (uint8_t)NRF_UART0->RXD;
+}
+
+bool simple_uart_get_with_timeout(int32_t timeout_ms, uint8_t *rx_data)
+{
+  bool ret = true;
+  
+  while (NRF_UART0->EVENTS_RXDRDY != 1)
+  {
+    if (timeout_ms-- >= 0)
+    {
+      // wait in 1ms chunk before checking for status
+      nrf_delay_us(1000);
+    }
+    else
+    {
+      ret = false;
+      break;
+    }
+  }  // Wait for RXD data to be received
+
+  if (timeout_ms >= 0)
+  {
+    // clear the event and set rx_data with received byte
+      NRF_UART0->EVENTS_RXDRDY = 0;
+      *rx_data = (uint8_t)NRF_UART0->RXD;
+  }
+
+  return ret;
+}
+
+void simple_uart_put(uint8_t cr)
+{
+  NRF_UART0->TXD = (uint8_t)cr;
+
+  while (NRF_UART0->EVENTS_TXDRDY!=1)
+  {
+    // Wait for TXD data to be sent
+  }
+
+  NRF_UART0->EVENTS_TXDRDY=0;
+}
+
+void simple_uart_putstring(const uint8_t *str)
+{
+  uint_fast8_t i = 0;
+  uint8_t ch = str[i++];
+  while (ch != '\0')
+  {
+    simple_uart_put(ch);
+    ch = str[i++];
+  }
+}
+
+//void simple_uart_config(  uint8_t rts_pin_number,
+//                          uint8_t txd_pin_number,
+//                          uint8_t cts_pin_number,
+//                          uint8_t rxd_pin_number,
+//                          bool    hwfc)
+//{
+///** @snippet [Configure UART RX and TX pin] */
+//  nrf_gpio_cfg_output(txd_pin_number);
+//  nrf_gpio_cfg_input(rxd_pin_number, NRF_GPIO_PIN_NOPULL);  
+
+//  NRF_UART0->PSELTXD = txd_pin_number;
+//  NRF_UART0->PSELRXD = rxd_pin_number;
+///** @snippet [Configure UART RX and TX pin] */
+//  if (hwfc)
+//  {
+//    nrf_gpio_cfg_output(rts_pin_number);
+//    nrf_gpio_cfg_input(cts_pin_number, NRF_GPIO_PIN_NOPULL);
+//    NRF_UART0->PSELCTS = cts_pin_number;
+//    NRF_UART0->PSELRTS = rts_pin_number;
+//    NRF_UART0->CONFIG  = (UART_CONFIG_HWFC_Enabled << UART_CONFIG_HWFC_Pos);
+//  }
+
+//  NRF_UART0->BAUDRATE         = (UART_BAUDRATE_BAUDRATE_Baud38400 << UART_BAUDRATE_BAUDRATE_Pos);
+//  NRF_UART0->ENABLE           = (UART_ENABLE_ENABLE_Enabled << UART_ENABLE_ENABLE_Pos);
+//  NRF_UART0->TASKS_STARTTX    = 1;
+//  NRF_UART0->TASKS_STARTRX    = 1;
+//  NRF_UART0->EVENTS_RXDRDY    = 0;
+//	
+//	
+//	/////////////////
+//	NRF_UART0->INTENSET         = UART_INTENSET_RXDRDY_Enabled << UART_INTENSET_RXDRDY_Pos;
+//	NVIC_ClearPendingIRQ(UART0_IRQn);//
+//	NVIC_SetPriority(UART0_IRQn, APP_IRQ_PRIORITY_LOW);
+//	NVIC_EnableIRQ(UART0_IRQn);
+//}
+
+
+void simple_uart_config(uint8_t txd_pin_number,uint8_t rxd_pin_number,bool hwfc)
+{
+/** @snippet [Configure UART RX and TX pin] */
+  nrf_gpio_cfg_output(txd_pin_number);
+  nrf_gpio_cfg_input(rxd_pin_number, NRF_GPIO_PIN_NOPULL);  
+
+  NRF_UART0->PSELTXD = txd_pin_number;
+  NRF_UART0->PSELRXD = rxd_pin_number;
+/** @snippet [Configure UART RX and TX pin] */
+//  if (hwfc)
+//  {
+//    nrf_gpio_cfg_output(rts_pin_number);
+//    nrf_gpio_cfg_input(cts_pin_number, NRF_GPIO_PIN_NOPULL);
+//    NRF_UART0->PSELCTS = cts_pin_number;
+//    NRF_UART0->PSELRTS = rts_pin_number;
+//    NRF_UART0->CONFIG  = (UART_CONFIG_HWFC_Enabled << UART_CONFIG_HWFC_Pos);
+//  }
+
+  NRF_UART0->BAUDRATE         = (UART_BAUDRATE_BAUDRATE_Baud115200 << UART_BAUDRATE_BAUDRATE_Pos);
+  NRF_UART0->ENABLE           = (UART_ENABLE_ENABLE_Enabled << UART_ENABLE_ENABLE_Pos);
+  NRF_UART0->TASKS_STARTTX    = 1;
+  NRF_UART0->TASKS_STARTRX    = 1;
+  NRF_UART0->EVENTS_RXDRDY    = 0;
+	
+	
+	/////////////////
+	NRF_UART0->INTENSET         = UART_INTENSET_RXDRDY_Enabled << UART_INTENSET_RXDRDY_Pos;
+	NVIC_ClearPendingIRQ(UART0_IRQn);//
+	NVIC_SetPriority(UART0_IRQn, APP_IRQ_PRIORITY_LOW);
+	NVIC_EnableIRQ(UART0_IRQn);
+}
+
+#define  USART_REC_LEN 200
+unsigned char RXdata[USART_REC_LEN] = {0};
+unsigned char UartData_Ok = false;
+
+unsigned short USART_RX_STA = 0x00;
+void UART0_IRQHandler(void)
+{
+	unsigned char Res = 0;
+	while(NRF_UART0->EVENTS_RXDRDY != 1)
+	{
+		// Wait for RXD data to be received
+	}
+	Res = NRF_UART0->RXD;
+	
+	NRF_UART0->EVENTS_RXDRDY = 0;
+	NVIC_ClearPendingIRQ(UART0_IRQn);
+	
+	//////////////////////////////////////
+	
+		
+		if((USART_RX_STA&0x8000)==0)//?車那??∩赤那3谷
+		{
+			if(USART_RX_STA&0x4000)//?車那?米?芍?0x0d
+			{
+				if(Res!=0x0a)USART_RX_STA=0;//?車那?∩赤?車,??D??a那?
+				else 
+				{
+					RXdata[USART_RX_STA&0X3FFF]=Res;
+					USART_RX_STA|=0x8000;	//?車那?赤那3谷
+				}
+			}
+			else //?1??那?米?0X0D
+				{	
+				if(Res==0x0d)
+				{
+					RXdata[USART_RX_STA&0X3FFF]=Res ;
+					USART_RX_STA++;	
+					USART_RX_STA|=0x4000;
+				}
+				else
+					{
+					RXdata[USART_RX_STA&0X3FFF]=Res ;
+					USART_RX_STA++;
+					if(USART_RX_STA>(USART_REC_LEN-1))USART_RX_STA=0;//?車那?那y?Y∩赤?車,??D??a那??車那?	  
+					}		 
+				}
+			}   
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/////////////////////////////
+	
+	
+	
+	
+	
+
+	}
+	
+	
+	
+//	if(RXdata[0] == '$')
+//	{
+////		if(XEvt_RcvDataCheck(RXdata,RxDataLen))
+//		if(RxDataLen == (RXdata[2]+4))
+//		{
+//			UartData_Ok = true;
+//		}
+//	}
+//	
+//	if(RXdata[0] != 0xB1 || RxDataLen>(RXdata[2]+4))
+//	{
+//		RxDataLen  = 0;
+//		memset(RXdata,0,sizeof(RXdata));
+//	}
+	
+extern unsigned int device_num;
+extern unsigned char device_name[20];
+	
+	
+	
+	
+static int ParseDeviceName_Set(char *buff)
+{
+	char *p;
+	unsigned int ret = 0x00;
+	char name[15] = {0x00};
+//	char device_name[16];
+	unsigned char i = 0,j=0;
+	if(!(strstr(buff,"$"))||!buff)	return -1;
+	p = strstr(buff,"$");
+//	printf("ParseDeviceName_Set:%s,%d\r\n",buff,strlen(buff));
+	for(i = 1;i<strlen(p);i++)
+	{	
+		if(p[i]!=0x0d&&p[i+1]!=0x0a)
+		{
+			name[j++] = p[i];	
+		}
+		else
+			break;
+	}
+	if(strlen((char *)name)!=8)
+		return -1;
+	for(i=0;i<strlen((char *)name);i++)
+	{
+		if(name[i]>='0'&&name[i]<='9')
+			continue;
+		else
+			return -1;
+	}
+//#if dbg
+//	printf("%s\r\n",name);
+//#endif
+	ret = atoi((char*)name);
+	return ret;
+}
+	extern 	void Storage_Module_init(void);
+void BlueDeviceName_Set(pstorage_handle_t * handle)
+{
+	uint32_t err_code;
+	pstorage_handle_t dest_block_id;
+	int value;
+		if(USART_RX_STA&0x8000)
+		{
+//#if dbg
+//	printf("value = %s\r\n",RXdata)		;
+//			
+//#endif			
+			value = ParseDeviceName_Set((char *)RXdata);
+			if(device_num!=value)
+			{
+				if(value>0)
+				{
+					Storage_Module_init();
+					err_code = pstorage_block_identifier_get(handle, 1, &dest_block_id);
+					err_code = pstorage_update(&dest_block_id, (uint8_t *)&value, 4, 0);
+					device_num = value;
+					nrf_delay_ms(2000);
+					USART_RX_STA = 0;
+	//				NVIC_SystemReset();
+				}
+				else
+				{
+//					#if dbg
+//					printf("value = %s\r\n",RXdata);
+//					#endif
+					USART_RX_STA = 0;
+				}
+			}
+			else
+			{
+					USART_RX_STA = 0;
+			}
+		}
+		
+}
+//	
+	
+	

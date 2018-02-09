@@ -1,0 +1,468 @@
+C51 COMPILER V9.00   MAIN                                                                  03/20/2017 09:46:32 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN MAIN.OBJ
+COMPILER INVOKED BY: D:\SOFT\keil\C51\BIN\C51.EXE MAIN.C BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include "reg52.h"
+   2          #include "main.h"
+   3          #include "mfrc522.h"    
+   4          #include <string.h>     
+   5          #include "LCD1602.h"
+   6          #include "STCEEPROM.h"
+   7          #include"KEY4X4.h"
+   8          #define uchar unsigned char
+   9          #define uint  unsigned int
+  10          
+  11          sbit Speak = P1^4;
+  12          sbit RED = P1^5;
+  13          sbit GREEN = P1^6;
+  14          sbit Relay = P1^7;
+  15          
+  16          sbit KEY5 = P1^3;
+  17          
+  18          unsigned char idata RevBuffer[30];
+  19          unsigned char Card_Num;                    
+  20          void iccardcode();
+  21          //œµÕ≥≥ı ºªØ
+  22          void InitializeSystem()
+  23          {
+  24   1      
+  25   1           PcdReset();
+  26   1           PcdAntennaOff(); 
+  27   1           PcdAntennaOn();  
+  28   1               M500PcdConfigISOType( 'A' );
+  29   1      
+  30   1       
+  31   1      }
+  32          unsigned char idata UID[4],Temp[4];
+  33          unsigned char Table[3]; 
+  34          unsigned char Num;
+  35          unsigned char Count,Countf,Count1,Count2,Count3,Count4,Count5,C_flag;
+  36          void Auto_Reader(void)
+  37          {
+  38   1          if(PcdRequest(0x52,Temp)==0)
+  39   1          {
+  40   2            if(PcdAnticoll(UID)==0)
+  41   2            { 
+  42   3                              Speak=0;delay_10ms(20);Speak=1;
+  43   3      
+  44   3      
+  45   3                              Count =  UID[0];
+  46   3                              if((Count==Count1)||(Count==Count2)||(Count==Count3)||(Count==Count4)||(Count==Count5))
+  47   3                              {
+  48   4                                      LCD1602_Disp_ZF(0x8a+0x40,"OK   ",5);
+  49   4                                      GREEN = 0;Relay=0;delay_10ms(200);Relay=1;GREEN = 1;
+  50   4                                      LCD1602_Disp_ZF(0x8a+0x40,"     ",5);
+  51   4                                      LCD1602_Disp_ZF(0x84+0x40,"   ",3);
+  52   4      
+  53   4                                      C_flag=1;
+  54   4                                      Table[0]=UID[0]/100+0x30;
+  55   4                                      Table[1]=UID[0]/10%10+0x30;
+C51 COMPILER V9.00   MAIN                                                                  03/20/2017 09:46:32 PAGE 2   
+
+  56   4                                      Table[2]=UID[0]%10+0x30;
+  57   4                                      LCD1602_Disp_ZF(0x84+0x40,Table,3);
+  58   4                              }
+  59   3                              else
+  60   3                              {
+  61   4                                      LCD1602_Disp_ZF(0x8a+0x40,"Error",5);
+  62   4                                      RED = 0;delay_10ms(200);RED = 1;
+  63   4                                      Speak=0;delay_10ms(5000);Speak=1;
+  64   4                                      LCD1602_Disp_ZF(0x8a+0x40,"     ",5);
+  65   4                                      LCD1602_Disp_ZF(0x84+0x40,"   ",3);
+  66   4                                      
+  67   4                                      C_flag=2;
+  68   4                              }
+  69   3      
+  70   3                      }
+  71   2              }
+  72   1      }
+  73          unsigned char Key_Value=0;
+  74          unsigned char KEY_t[6];
+  75          unsigned char idata MI_1,MI_2,MI_3,MI_4,MI_5,MI_6;
+  76          unsigned char idata SMI_1=0,SMI_2=0,SMI_3=0,SMI_4=0,SMI_5=0,SMI_6=0;
+  77          unsigned char MI_flag=0,MI_Num=0;
+  78          unsigned char MI_Mode=0;
+  79          void KEY_MAIN(void)
+  80          {
+  81   1                      P2 = 0xf0;
+  82   1                      if(P2 != 0xf0)
+  83   1                      {
+  84   2                              KEY4X4_Delay_1ms(15);   //∞¥º¸œ˚∂∂
+  85   2                              if(P2 != 0xf0)
+  86   2                              {       
+  87   3                                      Key_Value = KEY4X4_Keyscan();
+  88   3                                      switch(Key_Value)
+  89   3                                      {
+  90   4                                              case 15: Key_Value = 1;break;
+  91   4                                              case 14: Key_Value = 2;break;
+  92   4                                              case 13: Key_Value = 3;break;
+  93   4                                              case 12: Key_Value = 11;break;
+  94   4      
+  95   4                                              case 11: Key_Value = 4;break;
+  96   4                                              case 10: Key_Value = 5;break;
+  97   4                                              case 9: Key_Value = 6;break;
+  98   4                                              case 8: Key_Value = 12;break;
+  99   4      
+ 100   4                                              case 7: Key_Value = 7;break;
+ 101   4                                              case 6: Key_Value = 8;break;
+ 102   4                                              case 5: Key_Value = 9;break;
+ 103   4                                              case 4: Key_Value = 13;break;
+ 104   4      
+ 105   4                                              case 3: Key_Value = 15;break;
+ 106   4                                              case 2: Key_Value = 0;break;
+ 107   4                                              case 1: Key_Value = 16;break;
+ 108   4                                              case 0: Key_Value = 14;break;
+ 109   4                                      }
+ 110   3                                      Speak=0;delay_10ms(10);Speak=1;
+ 111   3                                      ////////////////////////////////
+ 112   3                                      if(MI_Mode==0)// ‰»Î√‹¬Îƒ£ Ω
+ 113   3                                         {
+ 114   4                                                      if((MI_Num<6)&&(Key_Value<11))
+ 115   4                                                      {
+ 116   5                                                              MI_Num++;// ‰»Îµ⁄º∏∏ˆ ˝◊÷
+ 117   5                                                          switch(MI_Num)
+C51 COMPILER V9.00   MAIN                                                                  03/20/2017 09:46:32 PAGE 3   
+
+ 118   5                                                              {
+ 119   6                                                                      case 1: MI_1= Key_Value;break;
+ 120   6                                                                      case 2: MI_2= Key_Value;break;
+ 121   6                                                                      case 3: MI_3= Key_Value;break;
+ 122   6                                                                      case 4: MI_4= Key_Value;break;
+ 123   6                                                                      case 5: MI_5= Key_Value;break;
+ 124   6                                                                      case 6: MI_6= Key_Value;break;
+ 125   6                                                              }
+ 126   5                                                              KEY_t[MI_Num-1]=Key_Value+0x30;
+ 127   5                                                              LCD1602_Disp_ZF(0x87,KEY_t,MI_Num);
+ 128   5                                                      }
+ 129   4                                                      if(Key_Value==14)//…æ≥˝
+ 130   4                                                      {
+ 131   5                                                              if(MI_Num==0)MI_Num=1;
+ 132   5                                                              MI_Num--;
+ 133   5                                                              LCD1602_Disp_ZF(0x87,"      ",6);
+ 134   5                                                              LCD1602_Disp_ZF(0x87,KEY_t,MI_Num);     
+ 135   5                                                      }
+ 136   4                                                      if(Key_Value==12)//–ﬁ∏ƒ√‹¬Î
+ 137   4                                                      {
+ 138   5                                                              if(MI_flag==1)//ø™À¯≥…π¶≤≈ø…“‘–ﬁ∏ƒ√‹¬Î
+ 139   5                                                              {
+ 140   6                                                                      MI_Mode=1;
+ 141   6                                                                      MI_Num=0;
+ 142   6                                                                      LCD1602_Disp_ZF(0x80,"Set-1:          ",16);
+ 143   6                                                                      LCD1602_Disp_ZF(0x87,"      ",6);
+ 144   6                                                              }
+ 145   5                                                              
+ 146   5                                                      }
+ 147   4                                                      if(Key_Value==15)//«Â≥˝√‹¬Î£¨000000
+ 148   4                                                      {
+ 149   5      
+ 150   5                                                                      SMI_1=0;SMI_2=0;SMI_3=0;SMI_4=0;SMI_5=0;SMI_6=0;
+ 151   5                                                                      LCD1602_Disp_ZF(0x80,"     Set OK     ",16);
+ 152   5                                                                      GREEN = 0;delay_10ms(200);GREEN = 1;
+ 153   5                                                                      LCD1602_Disp_ZF(0x80,"Input:          ",16);
+ 154   5      
+ 155   5                                                                      MI_Num=0;
+ 156   5                                                                      MI_Mode=0;      
+ 157   5                                                                      ISP_ERASE(0x2c00);              //◊¢“‚£∫◊÷Ω⁄±‡≥Ã ±±ÿ–Î“™œ»“™≤¡≥˝’˚∏ˆ…»«¯
+ 158   5                                                                      ISP_PROGRAM(0x2c00, Countf);
+ 159   5                                                                      ISP_PROGRAM(0x2c01, Count1);
+ 160   5                                                                      ISP_PROGRAM(0x2c02, Count2);
+ 161   5                                                                      ISP_PROGRAM(0x2c03, Count3);
+ 162   5                                                                      ISP_PROGRAM(0x2c04, Count4);
+ 163   5                                                                      ISP_PROGRAM(0x2c05, Count5);
+ 164   5                                                                      ISP_PROGRAM(0x2c10, SMI_1);
+ 165   5                                                                      ISP_PROGRAM(0x2c11, SMI_2);
+ 166   5                                                                      ISP_PROGRAM(0x2c12, SMI_3);
+ 167   5                                                                      ISP_PROGRAM(0x2c13, SMI_4);
+ 168   5                                                                      ISP_PROGRAM(0x2c14, SMI_5);
+ 169   5                                                                      ISP_PROGRAM(0x2c15, SMI_6);
+ 170   5                                                              
+ 171   5                                                      }
+ 172   4                                                      if(Key_Value==11)//»∑∂®
+ 173   4                                                      {
+ 174   5                                                              if((MI_1==SMI_1)&&(MI_2==SMI_2)&&(MI_3==SMI_3)&&(MI_4==SMI_4)&&(MI_5==SMI_5)&&(MI_6==SMI_6))
+ 175   5                                                              {//√‹¬Î’˝»∑£¨ø™√≈
+ 176   6                                                                      LCD1602_Disp_ZF(0x8e,"OK",2);
+ 177   6                                                                      GREEN = 0;Relay=0;delay_10ms(200);Relay=1;GREEN = 1;
+ 178   6                                                                      LCD1602_Disp_ZF(0x87,"      ",6);
+ 179   6                                                                      LCD1602_Disp_ZF(0x8e,"  ",2);
+C51 COMPILER V9.00   MAIN                                                                  03/20/2017 09:46:32 PAGE 4   
+
+ 180   6                                                                      Speak=0;delay_10ms(20);Speak=1;
+ 181   6                                                                      MI_Num=0;
+ 182   6                                                                      MI_flag=1;              
+ 183   6                                                              }
+ 184   5                                                              else //√‹¬Î≤ª∂‘
+ 185   5                                                              {
+ 186   6                                                                      LCD1602_Disp_ZF(0x8e,"Er",2);
+ 187   6                                                                      RED = 0;delay_10ms(200);RED = 1;
+ 188   6                                                                      Speak=0;delay_10ms(200);Speak=1;
+ 189   6                                                                      LCD1602_Disp_ZF(0x87,"      ",6);
+ 190   6                                                                      LCD1602_Disp_ZF(0x8e,"  ",2);
+ 191   6                                                                      MI_flag=0;
+ 192   6                                                                      MI_Num=0;       
+ 193   6                                                              }
+ 194   5                                                      }
+ 195   4                                         }
+ 196   3                                              //LCD1602_Disp_ZF(0x80,"Set-1:          ",16);
+ 197   3              //LCD1602_Disp_ZF(0x80,"     Set OK     ",16);
+ 198   3                                         if(MI_Mode==1)//–ﬁ∏ƒ√‹¬Îƒ£ Ω
+ 199   3                                         {
+ 200   4                                                      if((MI_Num<6)&&(Key_Value<11))
+ 201   4                                                      {
+ 202   5                                                              MI_Num++;// ‰»Îµ⁄º∏∏ˆ ˝◊÷
+ 203   5                                                          switch(MI_Num)
+ 204   5                                                              {
+ 205   6                                                                      case 1: SMI_1= Key_Value;break;
+ 206   6                                                                      case 2: SMI_2= Key_Value;break;
+ 207   6                                                                      case 3: SMI_3= Key_Value;break;
+ 208   6                                                                      case 4: SMI_4= Key_Value;break;
+ 209   6                                                                      case 5: SMI_5= Key_Value;break;
+ 210   6                                                                      case 6: SMI_6= Key_Value;break;
+ 211   6                                                              }
+ 212   5                                                              KEY_t[MI_Num-1]=Key_Value+0x30;
+ 213   5                                                              LCD1602_Disp_ZF(0x87,KEY_t,MI_Num);
+ 214   5                                                      }
+ 215   4                                                      if(Key_Value==14)//…æ≥˝
+ 216   4                                                      {
+ 217   5                                                              if(MI_Num==0)MI_Num=1;
+ 218   5                                                              MI_Num--;
+ 219   5                                                              LCD1602_Disp_ZF(0x87,"      ",6);
+ 220   5                                                              LCD1602_Disp_ZF(0x87,KEY_t,MI_Num);     
+ 221   5                                                      }
+ 222   4                                                      if(Key_Value==11)//»∑∂®
+ 223   4                                                      {
+ 224   5                                                                      LCD1602_Disp_ZF(0x80,"     Set OK     ",16);
+ 225   5                                                                      GREEN = 0;delay_10ms(200);GREEN = 1;
+ 226   5                                                                      LCD1602_Disp_ZF(0x80,"Input:          ",16);
+ 227   5      
+ 228   5                                                                      MI_Num=0;
+ 229   5                                                                      MI_Mode=0;
+ 230   5                                                                      ISP_ERASE(0x2c00);              //◊¢“‚£∫◊÷Ω⁄±‡≥Ã ±±ÿ–Î“™œ»“™≤¡≥˝’˚∏ˆ…»«¯
+ 231   5                                                                      ISP_PROGRAM(0x2c00, Countf);
+ 232   5                                                                      ISP_PROGRAM(0x2c01, Count1);
+ 233   5                                                                      ISP_PROGRAM(0x2c02, Count2);
+ 234   5                                                                      ISP_PROGRAM(0x2c03, Count3);
+ 235   5                                                                      ISP_PROGRAM(0x2c04, Count4);
+ 236   5                                                                      ISP_PROGRAM(0x2c05, Count5);
+ 237   5                                                                      ISP_PROGRAM(0x2c10, SMI_1);
+ 238   5                                                                      ISP_PROGRAM(0x2c11, SMI_2);
+ 239   5                                                                      ISP_PROGRAM(0x2c12, SMI_3);
+ 240   5                                                                      ISP_PROGRAM(0x2c13, SMI_4);
+ 241   5                                                                      ISP_PROGRAM(0x2c14, SMI_5);
+C51 COMPILER V9.00   MAIN                                                                  03/20/2017 09:46:32 PAGE 5   
+
+ 242   5                                                                      ISP_PROGRAM(0x2c15, SMI_6);             
+ 243   5                                                      
+ 244   5                                                      }
+ 245   4                                         }
+ 246   3                                       ///////////////////////////////////////////////////
+ 247   3                                      delay_10ms(20);
+ 248   3                                      //////////////////////////////////////
+ 249   3                           }
+ 250   2                 }
+ 251   1      
+ 252   1                 ////////////////////////////////////
+ 253   1      }
+ 254          void main(void)
+ 255          {     
+ 256   1              InitializeSystem();
+ 257   1              LCD1602_init();
+ 258   1              LCD1602_Disp_ZF(0x80+0x40,"Num:",4);
+ 259   1              LCD1602_Disp_ZF(0x80,"Input:          ",16);
+ 260   1              //LCD1602_Disp_ZF(0x80,"Set-1:          ",16);
+ 261   1              //LCD1602_Disp_ZF(0x80,"Set-2:          ",16);
+ 262   1              //LCD1602_Disp_ZF(0x80,"     Set OK     ",16);
+ 263   1      
+ 264   1              Countf=ISP_READ(0x2c00);                
+ 265   1              Count1=ISP_READ(0x2c01);
+ 266   1              Count2=ISP_READ(0x2c02);
+ 267   1              Count3=ISP_READ(0x2c03);
+ 268   1              Count4=ISP_READ(0x2c04);
+ 269   1              Count5=ISP_READ(0x2c05);
+ 270   1      
+ 271   1              SMI_1=ISP_READ(0x2c10);         
+ 272   1              SMI_2=ISP_READ(0x2c11);
+ 273   1              SMI_3=ISP_READ(0x2c12);
+ 274   1              SMI_4=ISP_READ(0x2c13);
+ 275   1              SMI_5=ISP_READ(0x2c14);
+ 276   1              SMI_6=ISP_READ(0x2c15);
+ 277   1              while (1)
+ 278   1              {       
+ 279   2                      ////////////////////////////////
+ 280   2                      iccardcode();
+ 281   2                      Auto_Reader();
+ 282   2                      ////////////////////////////////
+ 283   2      
+ 284   2                      KEY_MAIN();
+ 285   2                      if(!KEY5)
+ 286   2                      {
+ 287   3                              delay_10ms(50);
+ 288   3                              if(!KEY5)
+ 289   3                              {
+ 290   4                                      if(C_flag==2)
+ 291   4                                      {
+ 292   5                                              LCD1602_Disp_ZF(0x8a+0x40,"OK   ",5);
+ 293   5                                              delay_10ms(100);
+ 294   5                                              Countf++;
+ 295   5                                              if(Countf==6)Countf=1;
+ 296   5                                              if(Countf==1) Count1 = Count;
+ 297   5                                              if(Countf==2) Count2 = Count;
+ 298   5                                              if(Countf==3) Count3 = Count;
+ 299   5                                              if(Countf==4) Count4 = Count;
+ 300   5                                              if(Countf==5) Count5 = Count;
+ 301   5                                              LCD1602_Disp_ZF(0x8a+0x40,"     ",5);
+ 302   5      
+ 303   5                                      }
+C51 COMPILER V9.00   MAIN                                                                  03/20/2017 09:46:32 PAGE 6   
+
+ 304   4                                      if(C_flag==1)
+ 305   4                                      {
+ 306   5                                              LCD1602_Disp_ZF(0x8a+0x40,"Error",5);
+ 307   5                                              delay_10ms(100);
+ 308   5                                              if(Count==Count1)Count1=0;
+ 309   5                                              if(Count==Count2)Count2=0;
+ 310   5                                              if(Count==Count3)Count3=0;
+ 311   5                                              if(Count==Count4)Count4=0;
+ 312   5                                              if(Count==Count5)Count5=0;
+ 313   5                                              LCD1602_Disp_ZF(0x8a+0x40,"     ",5);
+ 314   5      
+ 315   5                                      }
+ 316   4                                      Speak=0;delay_10ms(20);Speak=1;
+ 317   4                                      ISP_ERASE(0x2c00);              //◊¢“‚£∫◊÷Ω⁄±‡≥Ã ±±ÿ–Î“™œ»“™≤¡≥˝’˚∏ˆ…»«¯
+ 318   4                                      ISP_PROGRAM(0x2c00, Countf);
+ 319   4                                      ISP_PROGRAM(0x2c01, Count1);
+ 320   4                                      ISP_PROGRAM(0x2c02, Count2);
+ 321   4                                      ISP_PROGRAM(0x2c03, Count3);
+ 322   4                                      ISP_PROGRAM(0x2c04, Count4);
+ 323   4                                      ISP_PROGRAM(0x2c05, Count5);
+ 324   4                                      ISP_PROGRAM(0x2c10, SMI_1);
+ 325   4                                      ISP_PROGRAM(0x2c11, SMI_2);
+ 326   4                                      ISP_PROGRAM(0x2c12, SMI_3);
+ 327   4                                      ISP_PROGRAM(0x2c13, SMI_4);
+ 328   4                                      ISP_PROGRAM(0x2c14, SMI_5);
+ 329   4                                      ISP_PROGRAM(0x2c15, SMI_6);
+ 330   4                                      C_flag =0;
+ 331   4                                      while(!KEY5);
+ 332   4                              }       
+ 333   3                      }
+ 334   2                      //////////////////////
+ 335   2              }
+ 336   1      }
+ 337          void iccardcode()
+ 338          {            
+ 339   1              unsigned char cmd;
+ 340   1              unsigned char status;
+ 341   1      
+ 342   1              
+ 343   1              cmd = RevBuffer[0];
+ 344   1              switch(cmd)
+ 345   1              {
+ 346   2                      case 1:     // Halt the card     //÷’÷πø®µƒ≤Ÿ◊˜
+ 347   2                              status= PcdHalt();;                     
+ 348   2                              RevBuffer[0]=1;
+ 349   2                              RevBuffer[1]=status;
+ 350   2                              break;                  
+ 351   2                      case 2:     // Request,Anticoll,Select,return CardType(2 bytes)+CardSerialNo(4 bytes)
+ 352   2                                      // —∞ø®£¨∑¿≥ÂÕª£¨—°‘Òø®    ∑µªÿø®¿‡–Õ£®2 bytes£©+ ø®œµ¡–∫≈(4 bytes)
+ 353   2                              status= PcdRequest(RevBuffer[1],&RevBuffer[2]);
+ 354   2                              if(status!=0)
+ 355   2                              {
+ 356   3                                      status= PcdRequest(RevBuffer[1],&RevBuffer[2]);
+ 357   3                                      if(status!=0)                           
+ 358   3                                      {
+ 359   4                                              RevBuffer[0]=1; 
+ 360   4                                              RevBuffer[1]=status;
+ 361   4                                              break;
+ 362   4                                      }
+ 363   3                              }  
+ 364   2                              RevBuffer[0]=3; 
+ 365   2                              RevBuffer[1]=status;
+C51 COMPILER V9.00   MAIN                                                                  03/20/2017 09:46:32 PAGE 7   
+
+ 366   2                              break;
+ 367   2                              
+ 368   2                      case 3:                         // ∑¿≥ÂÕª ∂¡ø®µƒœµ¡–∫≈ MLastSelectedSnr
+ 369   2                              status = PcdAnticoll(&RevBuffer[2]);
+ 370   2                              if(status!=0)
+ 371   2                              {
+ 372   3                                      RevBuffer[0]=1; 
+ 373   3                                      RevBuffer[1]=status;
+ 374   3                                      break;
+ 375   3                              }
+ 376   2                              //memcpy(MLastSelectedSnr,&RevBuffer[2],4);
+ 377   2                              RevBuffer[0]=5;
+ 378   2                              RevBuffer[1]=status;
+ 379   2                              break;  
+ 380   2                      case 4:                             // —°‘Òø® Select Card
+ 381   2                              //status=PcdSelect(MLastSelectedSnr);
+ 382   2                              if(status!=MI_OK)
+ 383   2                              {
+ 384   3                                      RevBuffer[0]=1; 
+ 385   3                                      RevBuffer[1]=status;
+ 386   3                                      break;
+ 387   3                              }
+ 388   2                              RevBuffer[0]=3;
+ 389   2                              RevBuffer[1]=status;                    
+ 390   2                              break;
+ 391   2                      case 5:     // Key loading into the MF RC500's EEPROM
+ 392   2                  //status = PcdAuthState(RevBuffer[1], RevBuffer[3], DefaultKey, MLastSelectedSnr);// –£—Èø®√‹¬
+             -Î
+ 393   2                              RevBuffer[0]=1;
+ 394   2                              RevBuffer[1]=status;                    
+ 395   2                              break;                                                  
+ 396   2                      case 6: 
+ 397   2                              RevBuffer[0]=1;
+ 398   2                              RevBuffer[1]=status;                    
+ 399   2                              break;                          
+ 400   2                      case 7:     
+ 401   2                      RevBuffer[0]=1;
+ 402   2                              RevBuffer[1]=status;                    
+ 403   2                              break;
+ 404   2                      case 8:     // Read the mifare card
+ 405   2                                  // ∂¡ø®
+ 406   2                              status=PcdRead(RevBuffer[1],&RevBuffer[2]);
+ 407   2                              if(status==0)
+ 408   2                              {RevBuffer[0]=17;}
+ 409   2                              else
+ 410   2                              {RevBuffer[0]=1;}
+ 411   2                              RevBuffer[1]=status;                    
+ 412   2                              break;
+ 413   2                      case 9:     // Write the mifare card
+ 414   2                                  // –¥ø®  œ¬‘ÿ√‹¬Î
+ 415   2                              status=PcdWrite(RevBuffer[1],&RevBuffer[2]);
+ 416   2                              RevBuffer[0]=1;
+ 417   2                              RevBuffer[1]=status;                    
+ 418   2                              break;
+ 419   2                      case 10:
+ 420   2                  PcdValue(RevBuffer[1],RevBuffer[2],&RevBuffer[3]);
+ 421   2                              RevBuffer[0]=1; 
+ 422   2                              RevBuffer[1]=status;
+ 423   2                              break;
+ 424   2                      case 12:    // ≤Œ ˝…Ë÷√
+ 425   2                          PcdBakValue(RevBuffer[1], RevBuffer[2]);
+ 426   2                              RevBuffer[0]=1; //contact
+C51 COMPILER V9.00   MAIN                                                                  03/20/2017 09:46:32 PAGE 8   
+
+ 427   2                              RevBuffer[1]=0;
+ 428   2                              break;          
+ 429   2              }
+ 430   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   2215    ----
+   CONSTANT SIZE    =     94    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     23       1
+   IDATA SIZE       =     50    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
