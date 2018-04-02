@@ -15,7 +15,7 @@
 #include "pstorage_platform.h"
 #include "pstorage_lhat.h"
 #include "ble_exdevice.h"
-#include "api_md5.h"
+//#include "api_md5.h"
 
 #if defined(ADD_NFC_CARD_FUNCV)
 #include "nfc_ms522.h"

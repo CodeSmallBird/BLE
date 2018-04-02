@@ -6,6 +6,21 @@
 #include "ble_service.h"
 #include "spi_drv.h "
 
+
+#if 1
+#define MAXRLEN 64  
+
+#define FIND_CARD_TIME				1400//50
+#define READ_CARD_TIME				1400//300
+#define WRITE_CARD_TIME				2000//1400  //1200//600
+#else
+#define MAXRLEN 64  
+
+#define FIND_CARD_TIME				50
+#define READ_CARD_TIME				300
+#define WRITE_CARD_TIME			   1200//	1200  //1200//600
+#endif
+
 /////////////////////////////////////////////////////////////////////
 //函数原型
 /////////////////////////////////////////////////////////////////////
@@ -140,6 +155,17 @@ char PcdValue(unsigned char dd_mode,unsigned char addr,unsigned char *pValue);
 #define     RFU3E                 0x3E   
 #define     RFU3F		  0x3F
 
+
+#define Idle	0x00
+#define Mem		0x01
+#define RandomID	0x02
+#define CalcCRC	0x03
+#define Transmit	0x04
+#define NoCmdChange	0x07
+#define Receive	0x08
+#define Transceive	0x0C
+#define MFAuthent	0x0E
+#define SoftReset	0x0F
 /////////////////////////////////////////////////////////////////////
 //和MF522通讯时返回的错误代码
 /////////////////////////////////////////////////////////////////////
@@ -162,7 +188,12 @@ char PcdValue(unsigned char dd_mode,unsigned char addr,unsigned char *pValue);
 #define NRSTPD_OFF 		nrf_gpio_pin_clear(NRSTPD_PIN);
 #endif
 
+extern unsigned char Pcd_SetTimer(unsigned long delaytime);//设定超时时间（ms）
 
+
+#define s8  char
+#define u8 unsigned char
+#define u16 unsigned int
 
 
 #endif

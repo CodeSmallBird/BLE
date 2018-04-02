@@ -17,16 +17,18 @@
 //#define ADD_NFC_CARD_FUNCV	//鏄惁娣诲姞NFC 鍔熻兘
 //#define PIN_V2
 #define ADD_NFC_CARD_FUNCV2	// 读写卡功能
-
+//#define TEST_CARD_DEBUG_FUNCV	//测试时可以打开该宏
 
 #if defined(ADD_NFC_CARD_FUNCV2)
 #define FLASH_READ_WRITE
 
-#define ADD_HOER_DETEC		//添加霍尔传感器
+//#define ADD_HOER_DETEC		//添加霍尔传感器
 
 #define CTRL_NFC_POWER	//控制NFCpower电源
 
 #define CARD_CONTEN_UPDATE		//修改写卡和加密内容
+
+#define  ADD_BT_OPEN_LOCK		    // 添加蓝牙开锁功能
 
 #endif
 
@@ -49,8 +51,8 @@
 
 //#define MT2503_RESET_PIN	     12
 
-#define MT2503_TX_PIN			 	4 //4
-#define MT2503_RX_PIN 		 		5 //5
+#define MT2503_TX_PIN			 	5 //4
+#define MT2503_RX_PIN 		 		4 //5
 
 
 #define BUZZER_EN 				 10
@@ -98,8 +100,8 @@
 
 //#define MT2503_RESET_PIN	     12
 
-#define MT2503_TX_PIN			 	4//4
-#define MT2503_RX_PIN 		 		5//5
+#define MT2503_TX_PIN			 	5//4
+#define MT2503_RX_PIN 		 		4//5
 
 
 #define BUZZER_EN 				 10

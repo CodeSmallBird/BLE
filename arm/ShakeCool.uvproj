@@ -564,6 +564,11 @@
               <FileType>1</FileType>
               <FilePath>..\user_file\spi_drv\spi_drv.c</FilePath>
             </File>
+            <File>
+              <FileName>BleProtocl.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\user_file\AppLock\BleProtocl.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -575,24 +580,14 @@
               <FilePath>..\user_file\nfc522\RC522.C</FilePath>
             </File>
             <File>
-              <FileName>api_nfc.C</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\user_file\nfc522\api_nfc.C</FilePath>
-            </File>
-            <File>
-              <FileName>md5.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\user_file\md5\md5.c</FilePath>
-            </File>
-            <File>
-              <FileName>api_md5.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\user_file\nfc522\api_md5.c</FilePath>
-            </File>
-            <File>
               <FileName>uart_nfc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\user_file\nfc522\uart_nfc.c</FilePath>
+            </File>
+            <File>
+              <FileName>api_card_type.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\user_file\nfc522\api_card_type.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -953,7 +948,7 @@
               <MiscControls>--c99</MiscControls>
               <Define>NRF51 DEBUG_NRF_USER BLE_STACK_SUPPORT_REQD BOARD_NRF6310</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Include;..\Include\app_common;..\Include\ble;..\Include\ble\ble_services;..\Include\s110;..\Include\sd_common;..\head_file;..\Include\boards;..\user_file\spi_drv;..\user_file\nfc522;..\user_file\md5</IncludePath>
+              <IncludePath>..\Include;..\Include\app_common;..\Include\ble;..\Include\ble\ble_services;..\Include\s110;..\Include\sd_common;..\head_file;..\Include\boards;..\user_file\spi_drv;..\user_file\nfc522;..\user_file\AppLock</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1156,6 +1151,11 @@
               <FileType>1</FileType>
               <FilePath>..\user_file\spi_drv\spi_drv.c</FilePath>
             </File>
+            <File>
+              <FileName>BleProtocl.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\user_file\AppLock\BleProtocl.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1167,24 +1167,14 @@
               <FilePath>..\user_file\nfc522\RC522.C</FilePath>
             </File>
             <File>
-              <FileName>api_nfc.C</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\user_file\nfc522\api_nfc.C</FilePath>
-            </File>
-            <File>
-              <FileName>md5.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\user_file\md5\md5.c</FilePath>
-            </File>
-            <File>
-              <FileName>api_md5.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\user_file\nfc522\api_md5.c</FilePath>
-            </File>
-            <File>
               <FileName>uart_nfc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\user_file\nfc522\uart_nfc.c</FilePath>
+            </File>
+            <File>
+              <FileName>api_card_type.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\user_file\nfc522\api_card_type.c</FilePath>
             </File>
           </Files>
         </Group>

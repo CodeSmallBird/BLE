@@ -1,11 +1,37 @@
 #include "rc522.h"
 
 //#define DEBUG_RC522
-#define MAXRLEN 18  
 
-#define FIND_CARD_TIME				50
-#define READ_CARD_TIME				300
-#define WRITE_CARD_TIME				1400  //1200//600
+
+/********************************************
+函数名：	   Pcd_SetTimer
+功能：	   设置接收延时
+输入参数：    delaytime，延时时间（单位为毫秒）
+返回值：	   TRUE
+********************************************/
+unsigned char Pcd_SetTimer(unsigned long delaytime)//设定超时时间（ms）
+ {
+	 unsigned long int TimeReload;
+	 unsigned int  Prescaler;
+ 
+	 Prescaler=0;
+	 TimeReload=0;
+	 while(Prescaler<0xfff)
+	 {
+		 TimeReload = ((delaytime*(long)13560)-1)/(Prescaler*2+1);
+		 
+		 if( TimeReload<0xffff)
+			 break;
+		 Prescaler++;
+	 }
+	 TimeReload=TimeReload&0xFFFF;
+	 SetBitMask(TModeReg,Prescaler>>8);
+	 WriteRawRC(TPrescalerReg,Prescaler&0xFF);					 
+	 WriteRawRC(TReloadRegH,TimeReload>>8);
+	 WriteRawRC(TReloadRegL,TimeReload&0xFF);
+	 return true;
+ }
+
 
 /////////////////////////////////////////////////////////////////////
 //功    能：寻卡
@@ -322,6 +348,7 @@ char PcdReset(void)
 	WriteRawRC(TModeReg,0x8D);
 	WriteRawRC(TPrescalerReg,0x3E);
 	WriteRawRC(TxAutoReg,0x40); 
+	WriteRawRC(ModGsCfgReg,0x3F); 
 #if defined(DEBUG_RC522)
 	{
 		uint8_t red_data = ReadRawRC(VersionReg);
@@ -415,7 +442,8 @@ char PcdComMF522(unsigned char Command,
          n = ReadRawRC(ComIrqReg);
          i--;
     }
-    while ((i!=0) && !(n&0x01) && !(n&waitFor));
+	while ((i!=0) && !(n&0x02) && !(n&waitFor));
+    //while ((i!=0) && !(n&0x01) && !(n&waitFor));
     ClearBitMask(BitFramingReg,0x80);
 	      
     if (i!=0)

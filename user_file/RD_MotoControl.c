@@ -124,17 +124,20 @@ void moto_timer_stop(void)
 {
 	uint32_t err_code = app_timer_stop(m_moto_handle_id);
 	APP_ERROR_CHECK(err_code);
-	
+	Moto_DISABLE();
 #if dbg
 		printf("moto_timer_stop \r\n");
 #endif	
 }
 
-
-void moto_start(void)
+void moto_start(unsigned char direction)
 {
 	moto_timer_stop();
 	moto_timer_start();
+	if(direction == TURN_POSITIVE)
+		Moto_A2B();
+	else
+		Moto_B2A();
 }
 
 void buzzer_timer_stop(void)
@@ -142,7 +145,7 @@ void buzzer_timer_stop(void)
 	uint32_t err_code;
 	err_code = app_timer_stop(m_buzzer_timeout_id);
 	APP_ERROR_CHECK(err_code);
-
+	
 }
 
 void buzzer_timeout_handler(void * p_context)

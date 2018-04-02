@@ -21,9 +21,10 @@
 static    app_timer_id_t                        m_time_event_id;
 static    uint16_t                              m_conn_handle = BLE_CONN_HANDLE_INVALID;   /**< Handle of the current connection. */
 static    ble_gap_sec_params_t                  m_sec_params;                              /**< Security requirements for this application. */
+#if defined(ADD_BT_OPEN_LOCK)
 static    ble_gap_adv_params_t                  m_adv_params;                              /**< Parameters to be passed to the stack when starting advertising. */
 static    uint16_t                              m_adv_interval = 800;
-
+#endif
 //static uint8_t ad_flag =0;		//广播标志
 //////////////////////////////
 
@@ -51,6 +52,12 @@ CARD_RIDE_INFO last_card_ride_info;
 static ble_gap_addr_t 	mac_addr;
 static uint32_t m_clock_counter = 0;
 
+
+#if defined(ADD_BT_OPEN_LOCK)
+extern void BleProtoclDeal(uint8_t* receive_buf,uint8_t size);
+extern void app_open_send_data_to_phone(uint8_t cmd);
+extern void BleOpenUpdateDeviceName(void);
+#endif
 ///////////////////////////
 
 /**@brief Function for error handling, which is called when an error has occurred.
@@ -96,18 +103,19 @@ void assert_nrf_callback(uint16_t line_num, const uint8_t * p_file_name)
     app_error_handler(DEAD_BEEF, line_num, p_file_name);
 }
 
-uint32_t encrypt(uint32_t plainText, uint32_t key)  
+ 
+static uint32_t key_data=0xAA55;
+
+
+uint32_t encrypt(uint32_t plainText, uint32_t key)
 {  
 	return ((plainText+12131679)^key);  
 }  
 
-uint32_t  decrypt(uint32_t cipherText, uint32_t key)  
+uint32_t  decrypt(uint32_t cipherText, uint32_t key)
 {  
 	return ((cipherText^key)-12131679);  
-}  
-
-
-static uint32_t key_data=0xAA55;
+} 
 
 // 字节长度应是2的倍数
 void data_encrypt(uint8_t *encrypt_data,uint8_t length)
@@ -135,37 +143,6 @@ void data_decrypt(uint8_t *decrypt_data,uint8_t length)
 		decrypt_data[i*2+1] =(uint8_t)temp_data;
 	}
 }
-
-
-
-static bool checkout_receive_start_end_data(uint8_t* receive_buf,uint8_t size)
-{
-	uint8_t receive_crc = 0x00,cal_crc = 0x00;
-	uint8_t i = 0;
-	if(size<20)		return false;
-	if(receive_buf[0] == 0xAA && receive_buf[19] == 0x55) 
-	{
-		receive_crc = receive_buf[18];
-		
-		for(i = 1;i<18;i++)
-		{
-				cal_crc ^= receive_buf[i];
-		}
-		if(cal_crc!=receive_crc)
-		{
-		#if dbg
-			printf("cal_crc = 0x%02x,receive_crc = 0x%02x\r\n",cal_crc,receive_crc);
-		#endif
-			return false;
-		}
-			
-		else
-		return true;
-	}
-	else
-		return false;
-}
-
 
 
 #if 1
@@ -287,8 +264,18 @@ void SetBle_Name(void)
 {
 	memset(&device_name_info,0,sizeof(device_name_info));
 	memset(&device_name_info_temp,0,sizeof(device_name_info_temp));
+#if defined(ADD_BT_OPEN_LOCK)
+	g_number = 9072314;
+	sprintf((char *)device_name,"%s%c%c%03d%02d000000000",
+	LOGO,
+	(g_number/100000),((g_number/1000)%100),g_number%1000,55);
+	memcpy(ID,&device_name[2],5);
+	ID[5] = '\0';
+#endif
 	sprintf((char *)device_name_info.logo,"%.2s","ZH");
+#if !defined(ADD_BT_OPEN_LOCK)
 	sprintf((char *)device_name,"%.2s",device_name_info.logo);
+#endif
 }
 
 void Moto_DISABLE(void)
@@ -313,9 +300,8 @@ void Moto_B2A(void)
 
 void open_key_ctrl(void)
 {
-	Moto_A2B();
 	nrf_gpio_pin_clear(BUZZER_EN);
-	moto_start();
+	moto_start(TURN_POSITIVE);
 	buzzer_start(BUZZER_NORMAL);
 	device_name_info.lock_state = REQUEST_OPEN_LOCK;
 }
@@ -354,7 +340,35 @@ void string_to_hex(unsigned char *input_string, uint8_t *out_hex)
 	}
 }
 
-
+#if !defined(ADD_BT_OPEN_LOCK)
+static bool checkout_receive_start_end_data(uint8_t* receive_buf,uint8_t size)
+{
+	uint8_t receive_crc = 0x00,cal_crc = 0x00;
+	uint8_t i = 0;
+	if(size<20)		return false;
+	if(receive_buf[0] == 0xAA && receive_buf[19] == 0x55) 
+	{
+		receive_crc = receive_buf[18];
+		
+		for(i = 1;i<18;i++)
+		{
+			cal_crc ^= receive_buf[i];
+		}
+		if(cal_crc!=receive_crc)
+		{
+		#if dbg
+			printf("cal_crc = 0x%02x,receive_crc = 0x%02x\r\n",cal_crc,receive_crc);
+		#endif
+			return false;
+		}
+			
+		else
+		return true;
+	}
+	else
+		return false;
+}
+#endif
 
 static void receive_data_handle(ble_t * p_trans, ble_s_evt_t * p_evt,uint8_t* p_buff,uint8_t len)
 {	
@@ -367,7 +381,10 @@ static void receive_data_handle(ble_t * p_trans, ble_s_evt_t * p_evt,uint8_t* p_
 	}	
 	printf("\r\n");
 #endif
-  	if(checkout_receive_start_end_data(p_buff, len))
+#if defined(ADD_BT_OPEN_LOCK)
+	BleProtoclDeal(p_buff,len);
+#else
+  if(checkout_receive_start_end_data(p_buff, len))
 	{
 		uint8_t mac_check[6];
 		memset(&receivecmd,0,sizeof(receivecmd));
@@ -411,6 +428,7 @@ static void receive_data_handle(ble_t * p_trans, ble_s_evt_t * p_evt,uint8_t* p_
 	{
 		send_data_to_phone(CHECK_FAIL,last_card_ride_info);
 	}
+#endif
 }
 
 static void detection_buf_timeout_hander(void * p_context)
@@ -423,11 +441,15 @@ static void detection_buf_timeout_hander(void * p_context)
 	if(device_name_info.card_ride.dect_delay_time)
 		device_name_info.card_ride.dect_delay_time--;
 
+	if(device_name_info.ctrl_delay)
+		device_name_info.ctrl_delay--;
+
+
 	if(device_name_info.card_ride.delay_flag)
 	{
 		device_name_info.card_ride.delay_time++;
 		//同一张卡15秒内不能刷第二次
-		if(device_name_info.card_ride.delay_time>(8))		//30
+		if(device_name_info.card_ride.delay_time>(10))		//30
 		{
 			device_name_info.card_ride.delay_time = 0;
 			device_name_info.card_ride.delay_flag = false;
@@ -458,6 +480,7 @@ static void detection_buf_timeout_hander(void * p_context)
 	}
 	if(ride_flag)
 		m_clock_counter++;
+	
 #if 0
 	{
 		static uint16_t ad_time =0;
@@ -480,7 +503,7 @@ static void detection_buf_timeout_hander(void * p_context)
 	}
 #endif	
 
-#if defined(DEBUG_UART)
+#if 0//defined(DEBUG_UART)
 {
 	static uint8_t tick_dida = 0;
 	tick_dida++;
@@ -519,7 +542,7 @@ void timers_init(void)
  * @details This function sets up all the necessary GAP (Generic Access Profile) parameters of the
  *          device including the device name, appearance, and the preferred connection parameters.
  */
-#if 1 
+#if !defined(ADD_BT_OPEN_LOCK)
 void gap_params_init(void)
 {
 
@@ -567,7 +590,7 @@ void gap_params_init(void)
  * @details Encodes the required advertising data and passes it to the stack.
  *          Also builds a structure to be passed to the stack when starting advertising.
  */
- #if 1
+ #if !defined(ADD_BT_OPEN_LOCK)
 void advertising_init(void)
 {
 
@@ -703,13 +726,10 @@ void application_timers_stop(void)
  */
 void advertising_start(void)
 {
-#if 0
+#if defined(ADD_BT_OPEN_LOCK)
     uint32_t err_code;
-    
     err_code = sd_ble_gap_adv_start(&m_adv_params);
     APP_ERROR_CHECK(err_code);
-	//ad_flag = 1;
-	advertising_stop();
 #endif
 }
 
@@ -721,7 +741,6 @@ void advertising_stop(void)
 
     err_code = sd_ble_gap_adv_stop();
     APP_ERROR_CHECK(err_code);
-	//ad_flag = 0;
 }
 
 /**@brief Function for handling the Connection Parameters Module.
@@ -993,5 +1012,21 @@ void BleInit(void)
 	application_timers_start();
 	advertising_start();
 }
+
+#if defined(ADD_BT_OPEN_LOCK)
+void BtNameUpdate(void)
+{
+	if(device_name_info.mode_delay)
+	{
+		device_name_info.mode_delay--;
+		if(!device_name_info.mode_delay)
+		{
+			device_name_info.ctrl_mode = APP_OPEN;
+			BleOpenUpdateDeviceName();
+		}
+	}
+}
+#endif
+
 
 

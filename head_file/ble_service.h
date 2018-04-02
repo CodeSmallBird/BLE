@@ -133,12 +133,22 @@ typedef struct
 	uint8_t logo[2];
 	uint8_t vol;
 	uint8_t lock_state;	// 0 关锁，1 开锁 ， 2 请求开锁
+	uint8_t ctrl_delay;		// 检测错误也要延时
+#if defined(ADD_BT_OPEN_LOCK)	
+	uint8_t ctrl_mode;	//控制类型-- 0:app--1:卡
+	uint32_t mode_delay;	//	模块控制间隔
+#endif
 	CARD_RIDE_INFO card_ride;
 }DEVIC_NAME_INFO;
 extern DEVIC_NAME_INFO device_name_info;
 
-
-
+#if defined(ADD_BT_OPEN_LOCK)	
+enum
+{
+	APP_OPEN,
+	CARD_OPEN,
+};
+#endif
 #define dbg 0
 //#define ble_dbg 1
 #define B4_UART 1
@@ -157,8 +167,6 @@ extern void send_data_to_phone(uint8_t cmd,CARD_RIDE_INFO param);
 extern void gen_DeviceName(void);
 extern void open_key_ctrl(void);
 extern uint32_t get_m_clock_counter(void);
-#endif // _BLE_SERVICE_H_
-
 #if defined(FLASH_READ_WRITE)
 #define SYS_FLAG_DATA_LEN 16
 void update_flash_data(void);
@@ -166,4 +174,16 @@ void falsh_read(void);
 extern uint8_t flash_save_data[SYS_FLAG_DATA_LEN] __attribute__ ((aligned (4)));
 
 #endif
+
+
+#if defined(ADD_BT_OPEN_LOCK)
+extern void BtNameUpdate(void);
+#endif
+
+
+
+
+
+#endif // _BLE_SERVICE_H_
+
 

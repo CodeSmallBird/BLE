@@ -1,6 +1,6 @@
 Dependencies for Project 'ShakeCool', Target 'nrf51822_xxab_s110 (128K)': (DO NOT MODIFY !)
 F (..\Source\templates\arm\arm_startup_nrf51.s)(0x59F93306)(--cpu Cortex-M0 -g --apcs=interwork --pd "__MICROLIB SETA 1"-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include--list .\_build\arm_startup_nrf51.lst --xref -o .\_build\arm_startup_nrf51.o --depend .\_build\arm_startup_nrf51.d)
-F (..\Source\templates\system_nrf51.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\system_nrf51.o --omf_browse .\_build\system_nrf51.crf --depend .\_build\system_nrf51.d)
+F (..\Source\templates\system_nrf51.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\system_nrf51.o --omf_browse .\_build\system_nrf51.crf --depend .\_build\system_nrf51.d)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x52FDD27E)
 I (..\Include\nrf.h)(0x59F93307)
@@ -12,8 +12,8 @@ I (..\Include\system_nrf51.h)(0x59F93307)
 I (..\Include\nrf51_bitfields.h)(0x59F93307)
 I (..\Include\nrf51_deprecated.h)(0x59F93308)
 I (..\Include\compiler_abstraction.h)(0x59F93307)
-F (.\..\main.c)(0x5A6AC835)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\main.o --omf_browse .\_build\main.crf --depend .\_build\main.d)
-I (..\head_file\ble_service.h)(0x5A6B10E8)
+F (.\..\main.c)(0x5AC20974)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\main.o --omf_browse .\_build\main.crf --depend .\_build\main.d)
+I (..\head_file\ble_service.h)(0x5AB06E6B)
 I (..\Include\common.h)(0x59F93308)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x52FDD27E)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
@@ -48,7 +48,7 @@ I (..\Include\ble\ble_advdata.h)(0x59F93308)
 I (..\Include\ble\ble_services\ble_dis.h)(0x59F93308)
 I (..\Include\ble\ble_conn_params.h)(0x59F93308)
 I (..\Include\boards.h)(0x59F93308)
-I (..\Include\boards/nrf6310.h)(0x5A702D7B)
+I (..\Include\boards/nrf6310.h)(0x5ABC5976)
 I (..\Include\ble\ble_sensorsim.h)(0x59F93308)
 I (..\Include\sd_common\softdevice_handler.h)(0x59F93307)
 I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x52FDD27E)
@@ -70,7 +70,7 @@ I (..\Include\pstorage_platform.h)(0x59F93307)
 I (..\head_file\ble_trans.h)(0x59F93307)
 I (..\head_file\data_struct.h)(0x59F93307)
 I (..\Include\nrf_delay.h)(0x5A409553)
-I (..\head_file\RD_MotoControl.h)(0x5A4DBF10)
+I (..\head_file\RD_MotoControl.h)(0x5A938A25)
 I (..\head_file\RD_BatteryCharge.h)(0x59F93307)
 I (..\Include\app_common\app_button.h)(0x59F93308)
 I (..\Include\app_common\app_gpiote.h)(0x59F93308)
@@ -79,12 +79,7 @@ I (..\user_file\nfc522\uart_nfc.h)(0x5A4EDDE1)
 I (..\Include\nrf_nvmc.h)(0x59F93307)
 I (..\Include\app_common\pstorage_lhat.h)(0x59F93308)
 I (..\head_file\ble_exdevice.h)(0x59F93307)
-I (..\user_file\nfc522\api_md5.h)(0x5A6ACE9A)
-I (..\user_file\md5\md5.h)(0x5A4DD798)
-I (..\user_file\nfc522\api_nfc.h)(0x5A6B17A6)
-I (..\user_file\nfc522\rc522.h)(0x5A600BFA)
-I (..\user_file\spi_drv\spi_drv.h )(0x5A34BBDE)
-F (..\Source\ble\ble_services\ble_dis.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\ble_dis.o --omf_browse .\_build\ble_dis.crf --depend .\_build\ble_dis.d)
+F (..\Source\ble\ble_services\ble_dis.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\ble_dis.o --omf_browse .\_build\ble_dis.crf --depend .\_build\ble_dis.d)
 I (..\Include\ble\ble_services\ble_dis.h)(0x59F93308)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
 I (..\Include\ble\ble_services\ble_srv_common.h)(0x59F93308)
@@ -109,7 +104,7 @@ I (..\Include\s110\ble_gatts.h)(0x59F93307)
 I (..\Include\s110\ble_l2cap.h)(0x59F93307)
 I (..\Include\s110\ble_err.h)(0x59F93307)
 I (..\Include\nordic_common.h)(0x59F93307)
-F (..\user_file\ble_trans.c)(0x59F93308)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\ble_trans.o --omf_browse .\_build\ble_trans.crf --depend .\_build\ble_trans.d)
+F (..\user_file\ble_trans.c)(0x59F93308)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\ble_trans.o --omf_browse .\_build\ble_trans.crf --depend .\_build\ble_trans.d)
 I (..\head_file\ble_trans.h)(0x59F93307)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x52FDD27E)
@@ -135,7 +130,7 @@ I (..\Include\system_nrf51.h)(0x59F93307)
 I (..\Include\app_common\app_error.h)(0x59F93307)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x52FDD27E)
 I (..\Include\nordic_common.h)(0x59F93307)
-F (..\Source\ble\ble_error_log.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\ble_error_log.o --omf_browse .\_build\ble_error_log.crf --depend .\_build\ble_error_log.d)
+F (..\Source\ble\ble_error_log.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\ble_error_log.o --omf_browse .\_build\ble_error_log.crf --depend .\_build\ble_error_log.d)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x52FDD27E)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x52FDD27E)
@@ -154,7 +149,7 @@ I (..\Include\nrf_gpio.h)(0x59F93308)
 I (..\Include\nrf51_bitfields.h)(0x59F93307)
 I (..\Include\app_common\pstorage.h)(0x59F93308)
 I (..\Include\pstorage_platform.h)(0x59F93307)
-F (..\Source\ble\ble_advdata.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\ble_advdata.o --omf_browse .\_build\ble_advdata.crf --depend .\_build\ble_advdata.d)
+F (..\Source\ble\ble_advdata.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\ble_advdata.o --omf_browse .\_build\ble_advdata.crf --depend .\_build\ble_advdata.d)
 I (..\Include\ble\ble_advdata.h)(0x59F93308)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x52FDD27E)
@@ -180,7 +175,7 @@ I (..\Include\system_nrf51.h)(0x59F93307)
 I (..\Include\app_common\app_error.h)(0x59F93307)
 I (..\Include\nordic_common.h)(0x59F93307)
 I (..\Include\ble\ble_services\ble_srv_common.h)(0x59F93308)
-F (..\Source\ble\ble_services\ble_srv_common.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\ble_srv_common.o --omf_browse .\_build\ble_srv_common.crf --depend .\_build\ble_srv_common.d)
+F (..\Source\ble\ble_services\ble_srv_common.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\ble_srv_common.o --omf_browse .\_build\ble_srv_common.crf --depend .\_build\ble_srv_common.d)
 I (..\Include\ble\ble_services\ble_srv_common.h)(0x59F93308)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x52FDD27E)
@@ -200,11 +195,11 @@ I (..\Include\s110\nrf_svc.h)(0x59F93307)
 I (..\Include\s110\ble_gatt.h)(0x59F93307)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x52FDD27E)
 I (..\Include\nordic_common.h)(0x59F93307)
-F (..\Source\ble\ble_sensorsim.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\ble_sensorsim.o --omf_browse .\_build\ble_sensorsim.crf --depend .\_build\ble_sensorsim.d)
+F (..\Source\ble\ble_sensorsim.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\ble_sensorsim.o --omf_browse .\_build\ble_sensorsim.crf --depend .\_build\ble_sensorsim.d)
 I (..\Include\ble\ble_sensorsim.h)(0x59F93308)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x52FDD27E)
-F (..\Source\app_common\app_timer.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\app_timer.o --omf_browse .\_build\app_timer.crf --depend .\_build\app_timer.d)
+F (..\Source\app_common\app_timer.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\app_timer.o --omf_browse .\_build\app_timer.crf --depend .\_build\app_timer.d)
 I (..\Include\app_common\app_timer.h)(0x59F93308)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x52FDD27E)
@@ -227,7 +222,7 @@ I (..\Include\s110\nrf_error_soc.h)(0x59F93307)
 I (..\Include\nrf_delay.h)(0x5A409553)
 I (..\Include\nrf.h)(0x59F93307)
 I (..\Include\nrf51_deprecated.h)(0x59F93308)
-F (..\Source\sd_common\softdevice_handler.c)(0x59F93307)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\softdevice_handler.o --omf_browse .\_build\softdevice_handler.crf --depend .\_build\softdevice_handler.d)
+F (..\Source\sd_common\softdevice_handler.c)(0x59F93307)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\softdevice_handler.o --omf_browse .\_build\softdevice_handler.crf --depend .\_build\softdevice_handler.d)
 I (..\Include\sd_common\softdevice_handler.h)(0x59F93307)
 I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x52FDD27E)
 I (..\Include\s110\nrf_sdm.h)(0x59F93307)
@@ -261,7 +256,7 @@ I (..\Include\s110\ble_gatts.h)(0x59F93307)
 I (..\Include\sd_common\ant_stack_handler_types.h)(0x59F93307)
 I (..\Include\nordic_common.h)(0x59F93307)
 I (..\Include\nrf_assert.h)(0x59F93307)
-F (..\Source\ble\ble_conn_params.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\ble_conn_params.o --omf_browse .\_build\ble_conn_params.crf --depend .\_build\ble_conn_params.d)
+F (..\Source\ble\ble_conn_params.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\ble_conn_params.o --omf_browse .\_build\ble_conn_params.crf --depend .\_build\ble_conn_params.d)
 I (..\Include\ble\ble_conn_params.h)(0x59F93308)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
 I (..\Include\s110\ble.h)(0x59F93307)
@@ -291,7 +286,7 @@ I (..\Include\s110\ble_hci.h)(0x59F93307)
 I (..\Include\app_common\app_timer.h)(0x59F93308)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x52FDD27E)
 I (..\Include\app_common\app_scheduler.h)(0x59F93308)
-F (..\Source\ble\ble_bondmngr.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\ble_bondmngr.o --omf_browse .\_build\ble_bondmngr.crf --depend .\_build\ble_bondmngr.d)
+F (..\Source\ble\ble_bondmngr.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\ble_bondmngr.o --omf_browse .\_build\ble_bondmngr.crf --depend .\_build\ble_bondmngr.d)
 I (..\Include\ble\ble_bondmngr.h)(0x59F93308)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
 I (..\Include\s110\ble.h)(0x59F93307)
@@ -326,7 +321,7 @@ I (..\Include\app_common\crc16.h)(0x59F93308)
 I (..\Include\app_common\pstorage.h)(0x59F93308)
 I (..\Include\pstorage_platform.h)(0x59F93307)
 I (..\Include\ble_bondmngr_cfg.h)(0x59F93307)
-F (..\Source\app_common\pstorage.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\pstorage.o --omf_browse .\_build\pstorage.crf --depend .\_build\pstorage.d)
+F (..\Source\app_common\pstorage.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\pstorage.o --omf_browse .\_build\pstorage.crf --depend .\_build\pstorage.d)
 I (..\Include\app_common\pstorage.h)(0x59F93308)
 I (..\Include\pstorage_platform.h)(0x59F93307)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
@@ -350,11 +345,11 @@ I (..\Include\s110\nrf_svc.h)(0x59F93307)
 I (..\Include\s110\nrf_error_soc.h)(0x59F93307)
 I (..\Include\app_common\app_util.h)(0x59F93308)
 I (..\Include\app_common\app_error.h)(0x59F93307)
-F (..\Source\app_common\crc16.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\crc16.o --omf_browse .\_build\crc16.crf --depend .\_build\crc16.d)
+F (..\Source\app_common\crc16.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\crc16.o --omf_browse .\_build\crc16.crf --depend .\_build\crc16.d)
 I (..\Include\app_common\crc16.h)(0x59F93308)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x52FDD27E)
-F (..\Source\nrf_delay\nrf_delay.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\nrf_delay.o --omf_browse .\_build\nrf_delay.crf --depend .\_build\nrf_delay.d)
+F (..\Source\nrf_delay\nrf_delay.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\nrf_delay.o --omf_browse .\_build\nrf_delay.crf --depend .\_build\nrf_delay.d)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x52FDD27E)
 I (..\Include\compiler_abstraction.h)(0x59F93307)
 I (..\Include\nrf.h)(0x59F93307)
@@ -367,7 +362,7 @@ I (..\Include\system_nrf51.h)(0x59F93307)
 I (..\Include\nrf51_bitfields.h)(0x59F93307)
 I (..\Include\nrf51_deprecated.h)(0x59F93308)
 I (..\Include\nrf_delay.h)(0x5A409553)
-F (..\Source\ble\ble_debug_assert_handler.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\ble_debug_assert_handler.o --omf_browse .\_build\ble_debug_assert_handler.crf --depend .\_build\ble_debug_assert_handler.d)
+F (..\Source\ble\ble_debug_assert_handler.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\ble_debug_assert_handler.o --omf_browse .\_build\ble_debug_assert_handler.crf --depend .\_build\ble_debug_assert_handler.d)
 I (..\Include\ble\ble_debug_assert_handler.h)(0x59F93308)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x52FDD27E)
@@ -380,7 +375,7 @@ I (..\Include\ble\ble_error_log.h)(0x59F93308)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x52FDD27E)
 I (..\Include\ble\ble_flash.h)(0x59F93308)
 I (..\Include\nordic_common.h)(0x59F93307)
-F (..\Source\app_common\app_button.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\app_button.o --omf_browse .\_build\app_button.crf --depend .\_build\app_button.d)
+F (..\Source\app_common\app_button.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\app_button.o --omf_browse .\_build\app_button.crf --depend .\_build\app_button.d)
 I (..\Include\app_common\app_button.h)(0x59F93308)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x52FDD27E)
@@ -403,7 +398,7 @@ I (..\Include\app_common\app_util.h)(0x59F93308)
 I (..\Include\app_common\app_gpiote.h)(0x59F93308)
 I (..\Include\app_common\app_timer.h)(0x59F93308)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x52FDD27E)
-F (..\Source\app_common\app_gpiote.c)(0x5A4D8421)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\app_gpiote.o --omf_browse .\_build\app_gpiote.crf --depend .\_build\app_gpiote.d)
+F (..\Source\app_common\app_gpiote.c)(0x5A4D8421)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\app_gpiote.o --omf_browse .\_build\app_gpiote.crf --depend .\_build\app_gpiote.d)
 I (..\Include\app_common\app_gpiote.h)(0x59F93308)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x52FDD27E)
@@ -422,7 +417,7 @@ I (..\Include\app_common\app_util.h)(0x59F93308)
 I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x52FDD27E)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x52FDD27E)
 I (..\Include\nrf_gpio.h)(0x59F93308)
-I (..\head_file\ble_service.h)(0x5A6B10E8)
+I (..\head_file\ble_service.h)(0x5AB06E6B)
 I (..\Include\common.h)(0x59F93308)
 I (..\Include\nordic_common.h)(0x59F93307)
 I (..\Include\s110\ble.h)(0x59F93307)
@@ -441,7 +436,7 @@ I (..\Include\ble\ble_advdata.h)(0x59F93308)
 I (..\Include\ble\ble_services\ble_dis.h)(0x59F93308)
 I (..\Include\ble\ble_conn_params.h)(0x59F93308)
 I (..\Include\boards.h)(0x59F93308)
-I (..\Include\boards/nrf6310.h)(0x5A702D7B)
+I (..\Include\boards/nrf6310.h)(0x5ABC5976)
 I (..\Include\ble\ble_sensorsim.h)(0x59F93308)
 I (..\Include\sd_common\softdevice_handler.h)(0x59F93307)
 I (..\Include\s110\nrf_sdm.h)(0x59F93307)
@@ -460,10 +455,10 @@ I (..\Include\ble\ble_debug_assert_handler.h)(0x59F93308)
 I (..\Include\app_common\pstorage.h)(0x59F93308)
 I (..\Include\pstorage_platform.h)(0x59F93307)
 I (..\head_file\ble_trans.h)(0x59F93307)
-I (..\head_file\RD_MotoControl.h)(0x5A4DBF10)
+I (..\head_file\RD_MotoControl.h)(0x5A938A25)
 I (..\head_file\ble_exdevice.h)(0x59F93307)
 I (..\Include\nrf_delay.h)(0x5A409553)
-F (..\Source\simple_uart\simple_uart.c)(0x5A4ED9C2)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\simple_uart.o --omf_browse .\_build\simple_uart.crf --depend .\_build\simple_uart.d)
+F (..\Source\simple_uart\simple_uart.c)(0x5A4ED9C2)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\simple_uart.o --omf_browse .\_build\simple_uart.crf --depend .\_build\simple_uart.d)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
 I (..\Include\app_common\app_util.h)(0x59F93308)
 I (..\Include\compiler_abstraction.h)(0x59F93307)
@@ -486,7 +481,7 @@ I (..\Include\nrf_delay.h)(0x5A409553)
 I (..\Include\nrf_gpio.h)(0x59F93308)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x52FDD27E)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x52FDD27E)
-I (..\head_file\ble_service.h)(0x5A6B10E8)
+I (..\head_file\ble_service.h)(0x5AB06E6B)
 I (..\Include\common.h)(0x59F93308)
 I (..\Include\nordic_common.h)(0x59F93307)
 I (..\Include\s110\ble.h)(0x59F93307)
@@ -505,7 +500,7 @@ I (..\Include\ble\ble_advdata.h)(0x59F93308)
 I (..\Include\ble\ble_services\ble_dis.h)(0x59F93308)
 I (..\Include\ble\ble_conn_params.h)(0x59F93308)
 I (..\Include\boards.h)(0x59F93308)
-I (..\Include\boards/nrf6310.h)(0x5A702D7B)
+I (..\Include\boards/nrf6310.h)(0x5ABC5976)
 I (..\Include\ble\ble_sensorsim.h)(0x59F93308)
 I (..\Include\sd_common\softdevice_handler.h)(0x59F93307)
 I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x52FDD27E)
@@ -522,7 +517,7 @@ I (..\Include\ble\ble_flash.h)(0x59F93308)
 I (..\Include\ble\ble_bondmngr.h)(0x59F93308)
 I (..\Include\ble\ble_debug_assert_handler.h)(0x59F93308)
 I (..\head_file\ble_trans.h)(0x59F93307)
-F (..\Source\nrf_nvmc\nrf_nvmc.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\nrf_nvmc.o --omf_browse .\_build\nrf_nvmc.crf --depend .\_build\nrf_nvmc.d)
+F (..\Source\nrf_nvmc\nrf_nvmc.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\nrf_nvmc.o --omf_browse .\_build\nrf_nvmc.crf --depend .\_build\nrf_nvmc.d)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x52FDD27E)
 I (..\Include\nrf.h)(0x59F93307)
 I (..\Include\nrf51.h)(0x59F93307)
@@ -535,8 +530,8 @@ I (..\Include\nrf51_bitfields.h)(0x59F93307)
 I (..\Include\nrf51_deprecated.h)(0x59F93308)
 I (..\Include\compiler_abstraction.h)(0x59F93307)
 I (..\Include\nrf_nvmc.h)(0x59F93307)
-F (..\Source\app_common\pstorage_lhat.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\pstorage_lhat.o --omf_browse .\_build\pstorage_lhat.crf --depend .\_build\pstorage_lhat.d)
-I (..\head_file\RD_MotoControl.h)(0x5A4DBF10)
+F (..\Source\app_common\pstorage_lhat.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\pstorage_lhat.o --omf_browse .\_build\pstorage_lhat.crf --depend .\_build\pstorage_lhat.d)
+I (..\head_file\RD_MotoControl.h)(0x5A938A25)
 I (..\Include\common.h)(0x59F93308)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x52FDD27E)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
@@ -558,7 +553,7 @@ I (..\Include\s110\nrf_error.h)(0x59F93307)
 I (..\Include\app_common\app_util.h)(0x59F93308)
 I (..\Include\app_common\app_scheduler.h)(0x59F93308)
 I (..\Include\nrf_gpio.h)(0x59F93308)
-I (..\Include\boards\nrf6310.h)(0x5A702D7B)
+I (..\Include\boards\nrf6310.h)(0x5ABC5976)
 I (..\head_file\data_struct.h)(0x59F93307)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x52FDD27E)
 I (..\head_file\global_var.h)(0x59F93307)
@@ -574,7 +569,7 @@ I (..\Include\s110\ble_gatt.h)(0x59F93307)
 I (..\Include\s110\ble_gattc.h)(0x59F93307)
 I (..\Include\s110\ble_gatts.h)(0x59F93307)
 I (..\Include\ble\ble_services\ble_srv_common.h)(0x59F93308)
-I (..\head_file\ble_service.h)(0x5A6B10E8)
+I (..\head_file\ble_service.h)(0x5AB06E6B)
 I (..\Include\s110\ble_hci.h)(0x59F93307)
 I (..\Include\ble\ble_advdata.h)(0x59F93308)
 I (..\Include\ble\ble_services\ble_dis.h)(0x59F93308)
@@ -596,7 +591,7 @@ I (..\Include\ble\ble_debug_assert_handler.h)(0x59F93308)
 I (..\Include\app_common\pstorage.h)(0x59F93308)
 I (..\Include\pstorage_platform.h)(0x59F93307)
 I (..\Include\app_common\pstorage_lhat.h)(0x59F93308)
-F (..\Source\app_common\app_scheduler.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\app_scheduler.o --omf_browse .\_build\app_scheduler.crf --depend .\_build\app_scheduler.d)
+F (..\Source\app_common\app_scheduler.c)(0x59F93306)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\app_scheduler.o --omf_browse .\_build\app_scheduler.crf --depend .\_build\app_scheduler.d)
 I (..\Include\app_common\app_scheduler.h)(0x59F93308)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
 I (..\Include\app_common\app_error.h)(0x59F93307)
@@ -616,8 +611,8 @@ I (..\Include\s110\nrf_error_soc.h)(0x59F93307)
 I (..\Include\nrf_assert.h)(0x59F93307)
 I (..\Include\app_common\app_util.h)(0x59F93308)
 I (..\Include\compiler_abstraction.h)(0x59F93307)
-F (..\user_file\ble_service.c)(0x5A704128)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\ble_service.o --omf_browse .\_build\ble_service.crf --depend .\_build\ble_service.d)
-I (..\head_file\ble_service.h)(0x5A6B10E8)
+F (..\user_file\ble_service.c)(0x5ABC5A8E)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\ble_service.o --omf_browse .\_build\ble_service.crf --depend .\_build\ble_service.d)
+I (..\head_file\ble_service.h)(0x5AB06E6B)
 I (..\Include\common.h)(0x59F93308)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x52FDD27E)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
@@ -652,7 +647,7 @@ I (..\Include\ble\ble_advdata.h)(0x59F93308)
 I (..\Include\ble\ble_services\ble_dis.h)(0x59F93308)
 I (..\Include\ble\ble_conn_params.h)(0x59F93308)
 I (..\Include\boards.h)(0x59F93308)
-I (..\Include\boards/nrf6310.h)(0x5A702D7B)
+I (..\Include\boards/nrf6310.h)(0x5ABC5976)
 I (..\Include\ble\ble_sensorsim.h)(0x59F93308)
 I (..\Include\sd_common\softdevice_handler.h)(0x59F93307)
 I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x52FDD27E)
@@ -674,12 +669,12 @@ I (..\Include\pstorage_platform.h)(0x59F93307)
 I (..\head_file\ble_trans.h)(0x59F93307)
 I (..\head_file\data_struct.h)(0x59F93307)
 I (..\head_file\global_var.h)(0x59F93307)
-I (..\head_file\RD_MotoControl.h)(0x5A4DBF10)
+I (..\head_file\RD_MotoControl.h)(0x5A938A25)
 I (..\head_file\RD_BatteryCharge.h)(0x59F93307)
 I (..\head_file\ble_exdevice.h)(0x59F93307)
 I (..\Include\nrf_delay.h)(0x5A409553)
-F (..\user_file\RD_MotoControl.c)(0x5A7040D9)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\rd_motocontrol.o --omf_browse .\_build\rd_motocontrol.crf --depend .\_build\rd_motocontrol.d)
-I (..\head_file\RD_MotoControl.h)(0x5A4DBF10)
+F (..\user_file\RD_MotoControl.c)(0x5A938850)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\rd_motocontrol.o --omf_browse .\_build\rd_motocontrol.crf --depend .\_build\rd_motocontrol.d)
+I (..\head_file\RD_MotoControl.h)(0x5A938A25)
 I (..\Include\common.h)(0x59F93308)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x52FDD27E)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
@@ -701,8 +696,8 @@ I (..\Include\s110\nrf_error.h)(0x59F93307)
 I (..\Include\app_common\app_util.h)(0x59F93308)
 I (..\Include\app_common\app_scheduler.h)(0x59F93308)
 I (..\Include\nrf_gpio.h)(0x59F93308)
-I (..\Include\boards\nrf6310.h)(0x5A702D7B)
-I (..\head_file\ble_service.h)(0x5A6B10E8)
+I (..\Include\boards\nrf6310.h)(0x5ABC5976)
+I (..\head_file\ble_service.h)(0x5AB06E6B)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x52FDD27E)
 I (..\Include\s110\ble.h)(0x59F93307)
 I (..\Include\s110\ble_ranges.h)(0x59F93307)
@@ -736,7 +731,7 @@ I (..\Include\ble\ble_debug_assert_handler.h)(0x59F93308)
 I (..\Include\app_common\pstorage.h)(0x59F93308)
 I (..\Include\pstorage_platform.h)(0x59F93307)
 I (..\head_file\ble_trans.h)(0x59F93307)
-F (..\user_file\RD_BatteryCharge.c)(0x5A55D38F)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\rd_batterycharge.o --omf_browse .\_build\rd_batterycharge.crf --depend .\_build\rd_batterycharge.d)
+F (..\user_file\RD_BatteryCharge.c)(0x5A55D38F)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\rd_batterycharge.o --omf_browse .\_build\rd_batterycharge.crf --depend .\_build\rd_batterycharge.d)
 I (..\head_file\RD_BatteryCharge.h)(0x59F93307)
 I (..\Include\nrf_gpio.h)(0x59F93308)
 I (..\Include\nrf51.h)(0x59F93307)
@@ -756,8 +751,8 @@ I (..\Include\nrf_delay.h)(0x5A409553)
 I (..\Include\nrf.h)(0x59F93307)
 I (..\Include\nrf51_deprecated.h)(0x59F93308)
 I (..\Include\compiler_abstraction.h)(0x59F93307)
-I (..\Include\boards\nrf6310.h)(0x5A702D7B)
-I (..\head_file\ble_service.h)(0x5A6B10E8)
+I (..\Include\boards\nrf6310.h)(0x5ABC5976)
+I (..\head_file\ble_service.h)(0x5AB06E6B)
 I (..\Include\common.h)(0x59F93308)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x52FDD27E)
 I (..\Include\nordic_common.h)(0x59F93307)
@@ -794,7 +789,7 @@ I (..\Include\ble\ble_debug_assert_handler.h)(0x59F93308)
 I (..\Include\app_common\pstorage.h)(0x59F93308)
 I (..\Include\pstorage_platform.h)(0x59F93307)
 I (..\head_file\ble_trans.h)(0x59F93307)
-F (..\user_file\ble_exdevice.c)(0x5A373577)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\ble_exdevice.o --omf_browse .\_build\ble_exdevice.crf --depend .\_build\ble_exdevice.d)
+F (..\user_file\ble_exdevice.c)(0x5A373577)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\ble_exdevice.o --omf_browse .\_build\ble_exdevice.crf --depend .\_build\ble_exdevice.d)
 I (..\head_file\ble_exdevice.h)(0x59F93307)
 I (..\Include\common.h)(0x59F93308)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x52FDD27E)
@@ -830,7 +825,7 @@ I (..\Include\ble\ble_advdata.h)(0x59F93308)
 I (..\Include\ble\ble_services\ble_dis.h)(0x59F93308)
 I (..\Include\ble\ble_conn_params.h)(0x59F93308)
 I (..\Include\boards.h)(0x59F93308)
-I (..\Include\boards/nrf6310.h)(0x5A702D7B)
+I (..\Include\boards/nrf6310.h)(0x5ABC5976)
 I (..\Include\ble\ble_sensorsim.h)(0x59F93308)
 I (..\Include\sd_common\softdevice_handler.h)(0x59F93307)
 I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x52FDD27E)
@@ -852,9 +847,9 @@ I (..\Include\pstorage_platform.h)(0x59F93307)
 I (..\head_file\ble_trans.h)(0x59F93307)
 I (..\Include\twi_master.h)(0x59F93307)
 I (..\Include\nrf_delay.h)(0x5A409553)
-I (..\head_file\ble_service.h)(0x5A6B10E8)
+I (..\head_file\ble_service.h)(0x5AB06E6B)
 I (D:\Keil_v5\ARM\ARMCC\include\math.h)(0x52FDD27E)
-F (..\user_file\spi_drv\spi_drv.c)(0x5A600B7B)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\spi_drv.o --omf_browse .\_build\spi_drv.crf --depend .\_build\spi_drv.d)
+F (..\user_file\spi_drv\spi_drv.c)(0x5A600B7B)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\spi_drv.o --omf_browse .\_build\spi_drv.crf --depend .\_build\spi_drv.d)
 I (..\user_file\spi_drv\spi_drv.h)(0x5A34BBDE)
 I (..\Include\nrf_delay.h)(0x5A409553)
 I (..\Include\nrf.h)(0x59F93307)
@@ -867,8 +862,8 @@ I (..\Include\system_nrf51.h)(0x59F93307)
 I (..\Include\nrf51_bitfields.h)(0x59F93307)
 I (..\Include\nrf51_deprecated.h)(0x59F93308)
 I (..\Include\compiler_abstraction.h)(0x59F93307)
-I (..\Include\boards\nrf6310.h)(0x5A702D7B)
-I (..\head_file\ble_service.h)(0x5A6B10E8)
+I (..\Include\boards\nrf6310.h)(0x5ABC5976)
+I (..\head_file\ble_service.h)(0x5AB06E6B)
 I (..\Include\common.h)(0x59F93308)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x52FDD27E)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x52FDD27E)
@@ -912,8 +907,9 @@ I (..\Include\ble\ble_debug_assert_handler.h)(0x59F93308)
 I (..\Include\app_common\pstorage.h)(0x59F93308)
 I (..\Include\pstorage_platform.h)(0x59F93307)
 I (..\head_file\ble_trans.h)(0x59F93307)
-F (..\user_file\nfc522\RC522.C)(0x5A59DE6A)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\rc522.o --omf_browse .\_build\rc522.crf --depend .\_build\rc522.d)
-I (..\user_file\nfc522\rc522.h)(0x5A600BFA)
+F (..\user_file\AppLock\BleProtocl.c)(0x5AB06C88)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\bleprotocl.o --omf_browse .\_build\bleprotocl.crf --depend .\_build\bleprotocl.d)
+I (..\user_file\AppLock\BleProtocl.h)(0x5AB8AA54)
+I (..\Include\boards\nrf6310.h)(0x5ABC5976)
 I (..\Include\nrf_delay.h)(0x5A409553)
 I (..\Include\nrf.h)(0x59F93307)
 I (..\Include\nrf51.h)(0x59F93307)
@@ -925,8 +921,66 @@ I (..\Include\system_nrf51.h)(0x59F93307)
 I (..\Include\nrf51_bitfields.h)(0x59F93307)
 I (..\Include\nrf51_deprecated.h)(0x59F93308)
 I (..\Include\compiler_abstraction.h)(0x59F93307)
-I (..\Include\boards\nrf6310.h)(0x5A702D7B)
-I (..\head_file\ble_service.h)(0x5A6B10E8)
+I (..\head_file\ble_service.h)(0x5AB06E6B)
+I (..\Include\common.h)(0x59F93308)
+I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x52FDD27E)
+I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x52FDD27E)
+I (..\Include\nordic_common.h)(0x59F93307)
+I (..\Include\app_common\app_error.h)(0x59F93307)
+I (..\Include\s110\nrf_error.h)(0x59F93307)
+I (..\Include\nrf_gpio.h)(0x59F93308)
+I (..\Include\s110\ble.h)(0x59F93307)
+I (..\Include\s110\ble_ranges.h)(0x59F93307)
+I (..\Include\s110\ble_types.h)(0x59F93307)
+I (..\Include\s110\ble_gap.h)(0x59F93307)
+I (..\Include\s110\nrf_svc.h)(0x59F93307)
+I (..\Include\s110\ble_l2cap.h)(0x59F93307)
+I (..\Include\s110\ble_err.h)(0x59F93307)
+I (..\Include\s110\ble_gatt.h)(0x59F93307)
+I (..\Include\s110\ble_gattc.h)(0x59F93307)
+I (..\Include\s110\ble_gatts.h)(0x59F93307)
+I (..\Include\s110\ble_hci.h)(0x59F93307)
+I (..\Include\ble\ble_services\ble_srv_common.h)(0x59F93308)
+I (..\Include\app_common\app_util.h)(0x59F93308)
+I (..\Include\ble\ble_advdata.h)(0x59F93308)
+I (..\Include\ble\ble_services\ble_dis.h)(0x59F93308)
+I (..\Include\ble\ble_conn_params.h)(0x59F93308)
+I (..\Include\boards.h)(0x59F93308)
+I (..\Include\ble\ble_sensorsim.h)(0x59F93308)
+I (..\Include\sd_common\softdevice_handler.h)(0x59F93307)
+I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x52FDD27E)
+I (..\Include\s110\nrf_sdm.h)(0x59F93307)
+I (..\Include\s110\nrf_soc.h)(0x59F93307)
+I (..\Include\s110\nrf_error_soc.h)(0x59F93307)
+I (..\Include\s110\nrf_error_sdm.h)(0x59F93307)
+I (..\Include\app_common\app_scheduler.h)(0x59F93308)
+I (..\Include\sd_common\ble_stack_handler_types.h)(0x59F93307)
+I (..\Include\sd_common\ant_stack_handler_types.h)(0x59F93307)
+I (..\Include\app_common\app_timer.h)(0x59F93308)
+I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x52FDD27E)
+I (..\Include\ble\ble_error_log.h)(0x59F93308)
+I (..\Include\ble\ble_flash.h)(0x59F93308)
+I (..\Include\ble\ble_bondmngr.h)(0x59F93308)
+I (..\Include\ble\ble_debug_assert_handler.h)(0x59F93308)
+I (..\Include\app_common\pstorage.h)(0x59F93308)
+I (..\Include\pstorage_platform.h)(0x59F93307)
+I (..\head_file\ble_trans.h)(0x59F93307)
+I (..\head_file\RD_MotoControl.h)(0x5A938A25)
+F (..\user_file\nfc522\RC522.C)(0x5AB8BAFA)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\rc522.o --omf_browse .\_build\rc522.crf --depend .\_build\rc522.d)
+I (..\user_file\nfc522\rc522.h)(0x5ABAF718)
+I (..\Include\nrf_delay.h)(0x5A409553)
+I (..\Include\nrf.h)(0x59F93307)
+I (..\Include\nrf51.h)(0x59F93307)
+I (D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm0.h)(0x512C1E62)
+I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
+I (D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmInstr.h)(0x51BA6374)
+I (D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmFunc.h)(0x512C1E62)
+I (..\Include\system_nrf51.h)(0x59F93307)
+I (..\Include\nrf51_bitfields.h)(0x59F93307)
+I (..\Include\nrf51_deprecated.h)(0x59F93308)
+I (..\Include\compiler_abstraction.h)(0x59F93307)
+I (..\Include\boards\nrf6310.h)(0x5ABC5976)
+I (..\head_file\ble_service.h)(0x5AB06E6B)
 I (..\Include\common.h)(0x59F93308)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x52FDD27E)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x52FDD27E)
@@ -971,134 +1025,77 @@ I (..\Include\app_common\pstorage.h)(0x59F93308)
 I (..\Include\pstorage_platform.h)(0x59F93307)
 I (..\head_file\ble_trans.h)(0x59F93307)
 I (..\user_file\spi_drv\spi_drv.h )(0x5A34BBDE)
-F (..\user_file\nfc522\api_nfc.C)(0x5A703F48)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\api_nfc.o --omf_browse .\_build\api_nfc.crf --depend .\_build\api_nfc.d)
-I (..\user_file\nfc522\api_nfc.H)(0x5A6B17A6)
-I (..\user_file\nfc522\rc522.h)(0x5A600BFA)
-I (..\Include\nrf_delay.h)(0x5A409553)
-I (..\Include\nrf.h)(0x59F93307)
-I (..\Include\nrf51.h)(0x59F93307)
-I (D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm0.h)(0x512C1E62)
-I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
-I (D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmInstr.h)(0x51BA6374)
-I (D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmFunc.h)(0x512C1E62)
-I (..\Include\system_nrf51.h)(0x59F93307)
-I (..\Include\nrf51_bitfields.h)(0x59F93307)
-I (..\Include\nrf51_deprecated.h)(0x59F93308)
-I (..\Include\compiler_abstraction.h)(0x59F93307)
-I (..\Include\boards\nrf6310.h)(0x5A702D7B)
-I (..\head_file\ble_service.h)(0x5A6B10E8)
-I (..\Include\common.h)(0x59F93308)
-I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x52FDD27E)
-I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x52FDD27E)
-I (..\Include\nordic_common.h)(0x59F93307)
-I (..\Include\app_common\app_error.h)(0x59F93307)
-I (..\Include\s110\nrf_error.h)(0x59F93307)
-I (..\Include\nrf_gpio.h)(0x59F93308)
-I (..\Include\s110\ble.h)(0x59F93307)
-I (..\Include\s110\ble_ranges.h)(0x59F93307)
-I (..\Include\s110\ble_types.h)(0x59F93307)
-I (..\Include\s110\ble_gap.h)(0x59F93307)
-I (..\Include\s110\nrf_svc.h)(0x59F93307)
-I (..\Include\s110\ble_l2cap.h)(0x59F93307)
-I (..\Include\s110\ble_err.h)(0x59F93307)
-I (..\Include\s110\ble_gatt.h)(0x59F93307)
-I (..\Include\s110\ble_gattc.h)(0x59F93307)
-I (..\Include\s110\ble_gatts.h)(0x59F93307)
-I (..\Include\s110\ble_hci.h)(0x59F93307)
-I (..\Include\ble\ble_services\ble_srv_common.h)(0x59F93308)
-I (..\Include\app_common\app_util.h)(0x59F93308)
-I (..\Include\ble\ble_advdata.h)(0x59F93308)
-I (..\Include\ble\ble_services\ble_dis.h)(0x59F93308)
-I (..\Include\ble\ble_conn_params.h)(0x59F93308)
-I (..\Include\boards.h)(0x59F93308)
-I (..\Include\ble\ble_sensorsim.h)(0x59F93308)
-I (..\Include\sd_common\softdevice_handler.h)(0x59F93307)
-I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x52FDD27E)
-I (..\Include\s110\nrf_sdm.h)(0x59F93307)
-I (..\Include\s110\nrf_soc.h)(0x59F93307)
-I (..\Include\s110\nrf_error_soc.h)(0x59F93307)
-I (..\Include\s110\nrf_error_sdm.h)(0x59F93307)
-I (..\Include\app_common\app_scheduler.h)(0x59F93308)
-I (..\Include\sd_common\ble_stack_handler_types.h)(0x59F93307)
-I (..\Include\sd_common\ant_stack_handler_types.h)(0x59F93307)
-I (..\Include\app_common\app_timer.h)(0x59F93308)
-I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x52FDD27E)
-I (..\Include\ble\ble_error_log.h)(0x59F93308)
-I (..\Include\ble\ble_flash.h)(0x59F93308)
-I (..\Include\ble\ble_bondmngr.h)(0x59F93308)
-I (..\Include\ble\ble_debug_assert_handler.h)(0x59F93308)
-I (..\Include\app_common\pstorage.h)(0x59F93308)
-I (..\Include\pstorage_platform.h)(0x59F93307)
-I (..\head_file\ble_trans.h)(0x59F93307)
-I (..\user_file\spi_drv\spi_drv.h )(0x5A34BBDE)
-I (..\head_file\RD_MotoControl.h)(0x5A4DBF10)
-I (..\user_file\nfc522\api_md5.h)(0x5A6ACE9A)
-I (..\user_file\md5\md5.h)(0x5A4DD798)
-F (..\user_file\md5\md5.c)(0x5A4DE98F)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\md5.o --omf_browse .\_build\md5.crf --depend .\_build\md5.d)
-I (..\user_file\md5\md5.h)(0x5A4DD798)
-I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x52FDD27E)
-F (..\user_file\nfc522\api_md5.c)(0x5A6AD14A)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\api_md5.o --omf_browse .\_build\api_md5.crf --depend .\_build\api_md5.d)
-I (..\user_file\nfc522\api_md5.h)(0x5A6ACE9A)
-I (..\user_file\md5\md5.h)(0x5A4DD798)
-I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x52FDD27E)
-I (..\head_file\ble_service.h)(0x5A6B10E8)
-I (..\Include\common.h)(0x59F93308)
-I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x52FDD27E)
-I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
-I (..\Include\nordic_common.h)(0x59F93307)
-I (..\Include\nrf.h)(0x59F93307)
-I (..\Include\nrf51.h)(0x59F93307)
-I (D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm0.h)(0x512C1E62)
-I (D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmInstr.h)(0x51BA6374)
-I (D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmFunc.h)(0x512C1E62)
-I (..\Include\system_nrf51.h)(0x59F93307)
-I (..\Include\nrf51_bitfields.h)(0x59F93307)
-I (..\Include\nrf51_deprecated.h)(0x59F93308)
-I (..\Include\compiler_abstraction.h)(0x59F93307)
-I (..\Include\app_common\app_error.h)(0x59F93307)
-I (..\Include\s110\nrf_error.h)(0x59F93307)
-I (..\Include\nrf_gpio.h)(0x59F93308)
-I (..\Include\s110\ble.h)(0x59F93307)
-I (..\Include\s110\ble_ranges.h)(0x59F93307)
-I (..\Include\s110\ble_types.h)(0x59F93307)
-I (..\Include\s110\ble_gap.h)(0x59F93307)
-I (..\Include\s110\nrf_svc.h)(0x59F93307)
-I (..\Include\s110\ble_l2cap.h)(0x59F93307)
-I (..\Include\s110\ble_err.h)(0x59F93307)
-I (..\Include\s110\ble_gatt.h)(0x59F93307)
-I (..\Include\s110\ble_gattc.h)(0x59F93307)
-I (..\Include\s110\ble_gatts.h)(0x59F93307)
-I (..\Include\s110\ble_hci.h)(0x59F93307)
-I (..\Include\ble\ble_services\ble_srv_common.h)(0x59F93308)
-I (..\Include\app_common\app_util.h)(0x59F93308)
-I (..\Include\ble\ble_advdata.h)(0x59F93308)
-I (..\Include\ble\ble_services\ble_dis.h)(0x59F93308)
-I (..\Include\ble\ble_conn_params.h)(0x59F93308)
-I (..\Include\boards.h)(0x59F93308)
-I (..\Include\boards/nrf6310.h)(0x5A702D7B)
-I (..\Include\ble\ble_sensorsim.h)(0x59F93308)
-I (..\Include\sd_common\softdevice_handler.h)(0x59F93307)
-I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x52FDD27E)
-I (..\Include\s110\nrf_sdm.h)(0x59F93307)
-I (..\Include\s110\nrf_soc.h)(0x59F93307)
-I (..\Include\s110\nrf_error_soc.h)(0x59F93307)
-I (..\Include\s110\nrf_error_sdm.h)(0x59F93307)
-I (..\Include\app_common\app_scheduler.h)(0x59F93308)
-I (..\Include\sd_common\ble_stack_handler_types.h)(0x59F93307)
-I (..\Include\sd_common\ant_stack_handler_types.h)(0x59F93307)
-I (..\Include\app_common\app_timer.h)(0x59F93308)
-I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x52FDD27E)
-I (..\Include\ble\ble_error_log.h)(0x59F93308)
-I (..\Include\ble\ble_flash.h)(0x59F93308)
-I (..\Include\ble\ble_bondmngr.h)(0x59F93308)
-I (..\Include\ble\ble_debug_assert_handler.h)(0x59F93308)
-I (..\Include\app_common\pstorage.h)(0x59F93308)
-I (..\Include\pstorage_platform.h)(0x59F93307)
-I (..\head_file\ble_trans.h)(0x59F93307)
-F (..\user_file\nfc522\uart_nfc.c)(0x5A4EE791)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\md5 --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\uart_nfc.o --omf_browse .\_build\uart_nfc.crf --depend .\_build\uart_nfc.d)
+F (..\user_file\nfc522\uart_nfc.c)(0x5A4EE791)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\uart_nfc.o --omf_browse .\_build\uart_nfc.crf --depend .\_build\uart_nfc.d)
 I (..\user_file\nfc522\uart_nfc.h)(0x5A4EDDE1)
 I (..\Include\simple_uart.h)(0x5A4ED9D8)
 I (..\Include\app_common\pstorage.h)(0x59F93308)
 I (..\Include\pstorage_platform.h)(0x59F93307)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x52FDD27E)
+F (..\user_file\nfc522\api_card_type.c)(0x5AB8A43A)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --enum_is_int -I..\Include -I..\Include\app_common -I..\Include\ble -I..\Include\ble\ble_services -I..\Include\s110 -I..\Include\sd_common -I..\head_file -I..\Include\boards -I..\user_file\spi_drv -I..\user_file\nfc522 -I..\user_file\AppLock --c99-I D:\Keil_v5\ARM\RV31\INC-I D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I D:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\1.1.1\Device\Include-DNRF51 -DNRF51 -DDEBUG_NRF_USER -DBLE_STACK_SUPPORT_REQD -DBOARD_NRF6310 -o .\_build\api_card_type.o --omf_browse .\_build\api_card_type.crf --depend .\_build\api_card_type.d)
+I (..\user_file\nfc522\api_card_type.h)(0x5ABC580A)
+I (..\user_file\nfc522\.\ordinary_card\api_ordinary_card.h)(0x5AB8A0B7)
+I (..\user_file\nfc522\rc522.h)(0x5ABAF718)
+I (..\Include\nrf_delay.h)(0x5A409553)
+I (..\Include\nrf.h)(0x59F93307)
+I (..\Include\nrf51.h)(0x59F93307)
+I (D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm0.h)(0x512C1E62)
+I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
+I (D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmInstr.h)(0x51BA6374)
+I (D:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmFunc.h)(0x512C1E62)
+I (..\Include\system_nrf51.h)(0x59F93307)
+I (..\Include\nrf51_bitfields.h)(0x59F93307)
+I (..\Include\nrf51_deprecated.h)(0x59F93308)
+I (..\Include\compiler_abstraction.h)(0x59F93307)
+I (..\Include\boards\nrf6310.h)(0x5ABC5976)
+I (..\head_file\ble_service.h)(0x5AB06E6B)
+I (..\Include\common.h)(0x59F93308)
+I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x52FDD27E)
+I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x52FDD27E)
+I (..\Include\nordic_common.h)(0x59F93307)
+I (..\Include\app_common\app_error.h)(0x59F93307)
+I (..\Include\s110\nrf_error.h)(0x59F93307)
+I (..\Include\nrf_gpio.h)(0x59F93308)
+I (..\Include\s110\ble.h)(0x59F93307)
+I (..\Include\s110\ble_ranges.h)(0x59F93307)
+I (..\Include\s110\ble_types.h)(0x59F93307)
+I (..\Include\s110\ble_gap.h)(0x59F93307)
+I (..\Include\s110\nrf_svc.h)(0x59F93307)
+I (..\Include\s110\ble_l2cap.h)(0x59F93307)
+I (..\Include\s110\ble_err.h)(0x59F93307)
+I (..\Include\s110\ble_gatt.h)(0x59F93307)
+I (..\Include\s110\ble_gattc.h)(0x59F93307)
+I (..\Include\s110\ble_gatts.h)(0x59F93307)
+I (..\Include\s110\ble_hci.h)(0x59F93307)
+I (..\Include\ble\ble_services\ble_srv_common.h)(0x59F93308)
+I (..\Include\app_common\app_util.h)(0x59F93308)
+I (..\Include\ble\ble_advdata.h)(0x59F93308)
+I (..\Include\ble\ble_services\ble_dis.h)(0x59F93308)
+I (..\Include\ble\ble_conn_params.h)(0x59F93308)
+I (..\Include\boards.h)(0x59F93308)
+I (..\Include\ble\ble_sensorsim.h)(0x59F93308)
+I (..\Include\sd_common\softdevice_handler.h)(0x59F93307)
+I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x52FDD27E)
+I (..\Include\s110\nrf_sdm.h)(0x59F93307)
+I (..\Include\s110\nrf_soc.h)(0x59F93307)
+I (..\Include\s110\nrf_error_soc.h)(0x59F93307)
+I (..\Include\s110\nrf_error_sdm.h)(0x59F93307)
+I (..\Include\app_common\app_scheduler.h)(0x59F93308)
+I (..\Include\sd_common\ble_stack_handler_types.h)(0x59F93307)
+I (..\Include\sd_common\ant_stack_handler_types.h)(0x59F93307)
+I (..\Include\app_common\app_timer.h)(0x59F93308)
+I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x52FDD27E)
+I (..\Include\ble\ble_error_log.h)(0x59F93308)
+I (..\Include\ble\ble_flash.h)(0x59F93308)
+I (..\Include\ble\ble_bondmngr.h)(0x59F93308)
+I (..\Include\ble\ble_debug_assert_handler.h)(0x59F93308)
+I (..\Include\app_common\pstorage.h)(0x59F93308)
+I (..\Include\pstorage_platform.h)(0x59F93307)
+I (..\head_file\ble_trans.h)(0x59F93307)
+I (..\user_file\spi_drv\spi_drv.h )(0x5A34BBDE)
+I (..\head_file\RD_MotoControl.h)(0x5A938A25)
+I (..\user_file\nfc522\.\ordinary_card\..\ordinary_card\api_md5.h)(0x5A6ACE9A)
+I (..\user_file\nfc522\.\ordinary_card\..\ordinary_card\md5.h)(0x5A4DD798)
+I (..\user_file\nfc522\.\ordinary_card\api_ordinary_card.c)(0x5AB8A0FA)
+I (..\user_file\nfc522\.\ordinary_card\..\ordinary_card\api_md5.c)(0x5AB8A0EF)
+I (..\user_file\nfc522\.\ordinary_card\..\ordinary_card\..\ordinary_card\md5.c)(0x5A4DE98F)

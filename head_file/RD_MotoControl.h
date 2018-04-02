@@ -26,13 +26,18 @@ enum
 	BUZZER_ERROR,
 };
 
+enum
+{
+	TURN_POSITIVE,
+	TURN_REVERSE,
+};
 
 extern void Rd_MotoInit(void);
 extern void factory_test(void);
 
 extern void moto_timer_start(void);
 extern void moto_timer_stop(void);
-extern void moto_start(void);
+void moto_start(unsigned char direction);
 
 extern void buzzer_start(uint8_t mode);
 extern void buzzer_timer_create(void);
