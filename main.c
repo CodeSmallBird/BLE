@@ -15,13 +15,15 @@
 #include "pstorage_platform.h"
 #include "pstorage_lhat.h"
 #include "ble_exdevice.h"
-//#include "api_md5.h"
 
+#if defined(ADD_BT_OPEN_LOCK)
+#include "BleProtocl.h"
+#endif
 #if defined(ADD_NFC_CARD_FUNCV)
 #include "nfc_ms522.h"
 #endif
 #if defined(ADD_NFC_CARD_FUNCV2)
-#include "api_nfc.h"
+#include "api_card_type.h"
 #endif
 
 bool                                         m_blue_connect                     = false;         //蓝牙连接事件
@@ -79,7 +81,16 @@ void update_bt_information(uint8_t lock_state,uint32_t ride_time)
 #if dbg
 	printf("ride_time:%d--lock_state:%d\r\n",ride_time,lock_state);
 #endif
-	gen_DeviceName();
+#if defined(ADD_BT_OPEN_LOCK)
+	if(device_name_info.ctrl_mode ==     APP_OPEN)
+	{
+		BleOpenUpdateDeviceName();
+	}
+	else
+#endif
+	{
+		gen_DeviceName();
+	}
 }
 
 void sys_close_lock(void)
@@ -87,16 +98,26 @@ void sys_close_lock(void)
 #if dbg
 	printf("SYS_CLOSE_LOCK\r\n");			
 #endif
-	Moto_B2A();
+	//Moto_B2A();
 	nrf_gpio_pin_clear(BUZZER_EN);
-	moto_start();
+	moto_start(TURN_REVERSE);
 	buzzer_start(BUZZER_NORMAL);
 	memcpy(&last_card_ride_info,&device_name_info.card_ride,sizeof(CARD_RIDE_INFO));
 #if defined(FLASH_READ_WRITE)
 	memcpy(flash_save_data,&last_card_ride_info,4);
 #endif
 	update_bt_information(CLOSE_LOCK,get_m_clock_counter());
+#if defined(ADD_BT_OPEN_LOCK)
+	app_open_send_data_to_phone(CLOSE_LOCK);
+#else
 	send_data_to_phone(TRADE_RETURN,device_name_info.card_ride);
+#endif
+
+#if defined(ADD_BT_OPEN_LOCK)
+	if(device_name_info.ctrl_mode == CARD_OPEN)
+		device_name_info.mode_delay = 100;	//15s
+#endif
+
 	return;
 }
 
@@ -108,7 +129,11 @@ void sys_open_lock(void)
 	nrf_gpio_pin_clear(BUZZER_EN);
 	moto_timer_stop();	
 	update_bt_information(OPEN_LOCK,0);
+#if defined(ADD_BT_OPEN_LOCK)
+	app_open_send_data_to_phone(OPEN_LOCK);
+#else
 	send_data_to_phone(OPEN_SUCCES,device_name_info.card_ride);
+#endif
 	return ;
 }
 
@@ -134,6 +159,7 @@ static void mt2503_heart_event_handler(uint8_t pin_no, uint8_t button_action)
 			break;
 		case MOTO_STOP_PIN:
 		{
+			device_name_info.ctrl_delay = 8;
 			if((pins_state>>MOTO_STOP_PIN)&0x01)
 			{
 				sys_open_lock();	
@@ -411,7 +437,9 @@ int main(void)
 	#if defined(FLASH_READ_WRITE)
 		update_flash_data();
 	#endif
-	
+	#if defined(ADD_BT_OPEN_LOCK)
+		BtNameUpdate();
+	#endif
 	
 	}
 }
