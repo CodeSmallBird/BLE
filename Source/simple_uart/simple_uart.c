@@ -160,7 +160,7 @@ void UART0_IRQHandler(void)
 	NRF_UART0->EVENTS_RXDRDY = 0;
 	NVIC_ClearPendingIRQ(UART0_IRQn);
 	
-//	NFCUartPushReceiveByte(Res);	
+	UartPushReceiveByte(Res);
 	
 	//////////////////////////////////////
 }

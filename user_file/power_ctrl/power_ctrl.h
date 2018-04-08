@@ -64,7 +64,11 @@
 #define POW_MCU_OFF_ON              POW_MCU_OFF_HIGH
 #define POW_MCU_OFF_OFF             POW_MCU_OFF_LOW
 
-#define ADC_INPUT_INIT         nrf_gpio_cfg_input(ADC_INPUT, NRF_GPIO_PIN_NOPULL)  
+#define ADC_INPUT_INIT         nrf_gpio_cfg_input(ADC_INPUT, NRF_GPIO_PIN_NOPULL) 
+
+
+#define CHARGE_DET_INIT	          nrf_gpio_cfg_input(CHARGE_DETEC,NRF_GPIO_PIN_NOPULL)
+#define GET_CHARGE_DET_STATE	          nrf_gpio_pin_read(CHARGE_DETEC)
 
 typedef struct
 {
@@ -74,11 +78,21 @@ typedef struct
 	uint16_t ctrl_delay;
 	uint8_t detec_time;
 	uint16_t voltage;
-	
-
 }POWER_CTRL;
 
 extern POWER_CTRL power_ctrl;
+
+typedef struct
+{
+	unsigned char 	Time;
+	unsigned char 	SampNow;
+	unsigned char 	SampPrev;
+	unsigned char 	Wobble;
+	unsigned char 	Compara;
+	unsigned char 	Result;
+}DETECT_BUFF;
+extern DETECT_BUFF detect_buff;
+
 
 
 extern void power_ctrl_init(void);

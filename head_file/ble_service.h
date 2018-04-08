@@ -24,6 +24,7 @@
 #include "ble_debug_assert_handler.h"
 #include "pstorage.h"
 #include "ble_trans.h"
+#include "data_trans.h"
 //#define DEVICE_NAME                          "UGO10000531"                              /**< Name of device. Will be included in the advertising data. */
 
 #define DEVICE_NAME                          "UGO23178950"                              /**< Name of device. Will be included in the advertising data. */
@@ -129,7 +130,7 @@ extern DEVIC_NAME_INFO device_name_info;
 void ble_evt_dispatch(ble_evt_t * p_ble_evt);
 
 /////////////////////////////////////
-extern void send_data_to_phone(uint8_t cmd,CARD_RIDE_INFO param);
+extern void send_data_to_phone(void);
 
 #endif // _BLE_SERVICE_H_
 

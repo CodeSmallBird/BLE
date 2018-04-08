@@ -80,6 +80,7 @@ void assert_nrf_callback(uint16_t line_num, const uint8_t * p_file_name)
 }
 
 
+#if 0
 static bool checkout_receive_start_end_data(uint8_t* receive_buf,uint8_t size)
 {
 	uint8_t receive_crc = 0x00,cal_crc = 0x00;
@@ -107,27 +108,52 @@ static bool checkout_receive_start_end_data(uint8_t* receive_buf,uint8_t size)
 	else
 		return false;
 }
-
+#endif
 
 
 #if 1
 
-void send_data_to_phone(uint8_t cmd,CARD_RIDE_INFO param)
+void send_data_to_phone(void)
 {
-	uint8_t send_buf[20] = {0xAA};
+
+//	uint8_t crc = 0x00;//,i = 0;
+	uint8_t send_buf[120] = {0};	//
+	uint8_t nn_len = 0;
+	memcpy(send_buf,trans_data.help_to_app.data,trans_data.help_to_app.length);
+	nn_len = trans_data.help_to_app.length;
 	if(m_blue_connect)
 	{
-		
-		ble_data_update(&m_ble,send_buf, 20);
-  }
-#if 0//dbg 
-	printf("return data:\r\n");
-	for(i=0;i<20;i++)
-		printf("0x%02x ",send_buf[i]);
-	printf("\r\n");
+		if(nn_len<20)
+		{
+			ble_data_update(&m_ble,send_buf, nn_len);
+		}
+		else
+		{
+			unsigned char send_array_n = nn_len/20 ;
+			unsigned char send_array_m = nn_len%20 ;
+			unsigned char i=0,j=0 ;
+			uint8_t send_buf_back[20] = {0};
 
-#endif	
+			for(i=0;i<send_array_n;i++)
+			{
+				for(j=0;j<20;j++)
+				{
+					send_buf_back[j]=send_buf[i*20+j];
+				}
+				ble_data_update(&m_ble,send_buf_back, 20);
+
+				memset(send_buf_back,0,sizeof(send_buf_back));
+			}
+			for(j=0;j<send_array_m;j++)
+			{
+				send_buf_back[j]=send_buf[send_array_n*20+j];
+			}
+			ble_data_update(&m_ble,send_buf_back, send_array_m);
+			memset(send_buf_back,0,sizeof(send_buf_back));
+		}
+  }
 }
+
 
 #endif
 
@@ -171,7 +197,8 @@ void string_to_hex(unsigned char *input_string, uint8_t *out_hex)
 
 static void receive_data_handle(ble_t * p_trans, ble_s_evt_t * p_evt,uint8_t* p_buff,uint8_t len)
 {
-
+	memcpy(trans_data.app_to_help.data,p_buff,len);
+	trans_data.app_to_help.length = len;
 }
 
 static uint32_t Systime = 0;

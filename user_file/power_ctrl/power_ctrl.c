@@ -1,6 +1,7 @@
 #include "power_ctrl.h"
 
 POWER_CTRL power_ctrl;
+DETECT_BUFF detect_buff;
 
 #define APP_GPIOTE_MAX_USERS            1     /**< Maximum number of users of the GPIOTE handler. */
 #define BUTTON_DETECTION_DELAY             APP_TIMER_TICKS(5, APP_TIMER_PRESCALER)   /**< Delay from a GPIOTE event until a button is reported as pushed (in number of timer ticks). */
@@ -51,7 +52,7 @@ static void button_event_handler(uint8_t pin_no, uint8_t button_action)
 			#endif
 			}
 		}
-			break;
+		break;
 		default:break;
 	}
 }
@@ -78,10 +79,10 @@ static uint16_t bat_start(void)
 {
 
     NRF_ADC->CONFIG = (ADC_CONFIG_RES_8bit                             << ADC_CONFIG_RES_Pos)     |
-										  (ADC_CONFIG_INPSEL_AnalogInputNoPrescaling       << ADC_CONFIG_INPSEL_Pos)  |
-										  (ADC_CONFIG_REFSEL_VBG                           << ADC_CONFIG_REFSEL_Pos)  |
-										  (ADC_CONFIG_PSEL_AnalogInput4                    << ADC_CONFIG_PSEL_Pos)    |
-										  (ADC_CONFIG_EXTREFSEL_None                       << ADC_CONFIG_EXTREFSEL_Pos);
+					  (ADC_CONFIG_INPSEL_AnalogInputNoPrescaling       << ADC_CONFIG_INPSEL_Pos)  |
+					  (ADC_CONFIG_REFSEL_VBG                           << ADC_CONFIG_REFSEL_Pos)  |
+					  (ADC_CONFIG_PSEL_AnalogInput4                    << ADC_CONFIG_PSEL_Pos)    |
+					  (ADC_CONFIG_EXTREFSEL_None                       << ADC_CONFIG_EXTREFSEL_Pos);
     NRF_ADC->ENABLE = ADC_ENABLE_ENABLE_Enabled;
 	
 		NRF_ADC->EVENTS_END  = 0;    // Stop any running conversions.
@@ -89,19 +90,19 @@ static uint16_t bat_start(void)
 		nrf_delay_ms(5);
 		while(NRF_ADC->EVENTS_END == 0);
 		if (NRF_ADC->EVENTS_END != 0)
-    {
-        uint16_t     adc_result = 0;
-				
-        NRF_ADC->EVENTS_END     = 0;
-        adc_result              = NRF_ADC->RESULT;
-        NRF_ADC->TASKS_STOP     = 1;
-				NRF_ADC->ENABLE         = ADC_ENABLE_ENABLE_Disabled;
-        __NOP();__NOP();__NOP();				
-	#if defined(DEBUG_RUN)
-		//printf("adc_result:%d\r\n",adc_result);		
-	#endif
-        return  adc_result;				
-    } 
+	    {
+	        uint16_t     adc_result = 0;
+					
+	        NRF_ADC->EVENTS_END     = 0;
+	        adc_result              = NRF_ADC->RESULT;
+	        NRF_ADC->TASKS_STOP     = 1;
+			NRF_ADC->ENABLE         = ADC_ENABLE_ENABLE_Disabled;
+	        __NOP();__NOP();__NOP();				
+		#if defined(DEBUG_RUN)
+			//printf("adc_result:%d\r\n",adc_result);		
+		#endif
+	        return  adc_result;				
+	    } 
 		return 0;
 }
 
@@ -309,6 +310,50 @@ void power_ctrl_polling(void)
 	BatteryLedDispPoll();
 }
 
+
+
+void InitSamp(DETECT_BUFF    *Samp, U8 State)
+{
+	Samp->Time = 100;
+	Samp->SampPrev = Samp->SampNow = State;
+	Samp->Wobble = State;
+	Samp->Compara = !State;
+	Samp->Result = Samp->Compara;
+}
+
+
+//detec_buff
+
+U8 DetectSamp(DETECT_BUFF      *Samp, U8 State)
+{
+	if(Samp->Time)
+	{
+		Samp->Time--;
+		return 0;
+	}
+	Samp->SampPrev 		= 	Samp->SampNow;
+	Samp->SampNow		= 	State;
+	if(Samp->SampPrev 	!= 	Samp->SampNow)return 0;
+	Samp->Compara		= 	Samp->Wobble;
+	Samp->Wobble		= 	Samp->SampPrev;
+	if(Samp->Compara 	== 	Samp->Wobble)return 0;
+
+	Samp->Result = Samp->Compara;
+	return 1;	
+}
+
+
+void DetecInit(void)
+{
+	memset(&detect_buff,0,sizeof(detect_buff));
+	InitSamp(&detect_buff,GET_CHARGE_DET_STATE);
+}
+
+
+void DetectPoll(void)
+{
+	DetectSamp(&detect_buff,GET_CHARGE_DET_STATE);
+}
 
 
 
