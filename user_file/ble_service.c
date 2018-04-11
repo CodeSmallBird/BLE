@@ -265,7 +265,7 @@ void SetBle_Name(void)
 	memset(&device_name_info,0,sizeof(device_name_info));
 	memset(&device_name_info_temp,0,sizeof(device_name_info_temp));
 #if defined(ADD_BT_OPEN_LOCK)
-	g_number = 9072314;
+	g_number = 9072224;
 	sprintf((char *)device_name,"%s%c%c%03d%02d000000000",
 	LOGO,
 	(g_number/100000),((g_number/1000)%100),g_number%1000,55);

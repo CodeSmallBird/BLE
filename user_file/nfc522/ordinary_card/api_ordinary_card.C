@@ -359,6 +359,11 @@ char update_card_info(uint8_t *card_data_infor_data)
 	char status = 0;
 	//char error = 0;
 	
+#if defined(CARD_NO_LOCK)
+	status = 1;
+	device_name_info.card_ride.delay_flag = true;
+	device_name_info.card_ride.dect_delay_time = 5;
+#else
 	memcpy(nfc_wirte_data,card_data_infor_data,sizeof(nfc_wirte_data));
 	if(data_write_to_card(WALLET_ADDR,nfc_wirte_data) == 1)
 	{
@@ -370,7 +375,7 @@ char update_card_info(uint8_t *card_data_infor_data)
 		}
 		//break;
 	}
-	
+#endif	
 	/*if(status == 0)
 	{
 		for(;error<3;error++)
@@ -405,8 +410,11 @@ char nfc_lock_process(uint8_t *card_data_infor)
 	money |= ((int32_t)deal_data[REG_MONEY_HIGH_LOW])<<16;
 	money |= ((int32_t)deal_data[REG_MONEY_LOW_HIGH])<<8;
 	money |= deal_data[REG_MONEY_LOW_LOW];
-	
+#if defined(CARD_NO_LOCK)
+	if(1)//激活状态
+#else
 	if(deal_data[REG_CARD_STATE] == CARD_ACTIVATION_STATE)		//激活状态
+#endif
 	{
 	#if defined(DEBUG_APP_NFC)
 		printf("nfc_card_infor.id:---111\r\n");
@@ -414,7 +422,11 @@ char nfc_lock_process(uint8_t *card_data_infor)
 			printf("%d--%d ",device_name_info.card_ride.card_id[i],CardSnr[i]);
 		printf("\r\n");
 	#endif
+	#if defined(CARD_NO_LOCK)
+		if(0)//卡号一致
+	#else
 		if(memcmp(device_name_info.card_ride.card_id,CardSnr,sizeof(CardSnr))  == 0)//卡号一致
+	#endif
 		{
 			if(device_name_info.card_ride.delay_flag == true)
 			{
@@ -465,14 +477,21 @@ char nfc_lock_process(uint8_t *card_data_infor)
 		}
 		else		//卡号不一致
 		{
+		#if !defined(CARD_NO_LOCK)
 			if(deal_data[REG_LOCK_STATE] == NFC_CARD_LOCK_CLOSE)	// 卡状态为关锁
+		#else
+			if(1)	// 卡状态为关锁
+		#endif
 			{
 				//进入开锁流程
 			NFC_OPEN_LOCK:	
 			#if defined(DEBUG_APP_NFC)
 				printf("NFC_OPEN_LOCK:%d\r\n",money);
 			#endif
+			
+		#if !defined(CARD_NO_LOCK)
 				if(money > 0)//进入开锁流程
+		#endif
 				{
 				#if 0
 					if(update_card_info(deal_data))

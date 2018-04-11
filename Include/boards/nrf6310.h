@@ -30,6 +30,8 @@
 
 #define  ADD_BT_OPEN_LOCK		    // 添加蓝牙开锁功能
 
+#define CARD_NO_LOCK		//测试样卡--万能卡
+
 #endif
 
 #if defined(ADD_NFC_CARD_FUNCV)
