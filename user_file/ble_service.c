@@ -115,9 +115,7 @@ static bool checkout_receive_start_end_data(uint8_t* receive_buf,uint8_t size)
 
 void send_data_to_phone(void)
 {
-
-//	uint8_t crc = 0x00;//,i = 0;
-	uint8_t send_buf[120] = {0};	//
+	uint8_t send_buf[120] = {0};	
 	uint8_t nn_len = 0;
 	memcpy(send_buf,trans_data.help_to_app.data,trans_data.help_to_app.length);
 	nn_len = trans_data.help_to_app.length;
@@ -197,8 +195,7 @@ void string_to_hex(unsigned char *input_string, uint8_t *out_hex)
 
 static void receive_data_handle(ble_t * p_trans, ble_s_evt_t * p_evt,uint8_t* p_buff,uint8_t len)
 {
-	memcpy(trans_data.app_to_help.data,p_buff,len);
-	trans_data.app_to_help.length = len;
+	AppToHelpDataTran(p_buff,len);
 }
 
 static uint32_t Systime = 0;

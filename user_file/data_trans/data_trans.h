@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include"string.h"
-
+#include"ble_service.h"
 /*---------------------------------------------------------------------------------------------------*/
 /*---------------------------------------------------------------------------------------------------*/
 /*---------------------------------------------------------------------------------------------------*/
@@ -68,6 +68,16 @@ typedef struct{
 	}ReceFifo;
 }UART_UART_FORMAT;
 
+enum
+{
+	HEAD_BYTE_1,
+	HEAD_BYTE_2,
+	DATA_LEN,
+	DATA_DEAL,
+	TREAIN_CHECK,
+	TRAIN_END
+};
+
 
 #define UART_POLLING_TIME							8
 
@@ -88,11 +98,12 @@ typedef struct{
 
 
 extern UART_UART_FORMAT Uart;
-extern void UartPolling(void);
+extern void AppToHelpDataTran(uint8_t* p_buff,uint8_t len);
 extern U8   UartPushReceiveByte(U8 Data);
 extern U8   UartPopSendByte(U8 *Data);
 extern void ProtocolSend(void);
-
+extern void DataTrainsInit(void);
+extern void DataTrainsPolling(void);
 /*---------------------------------------------------------------------------------------------------*/
 /*---------------------------------------------------------------------------------------------------*/
 /*---------------------------------------------------------------------------------------------------*/

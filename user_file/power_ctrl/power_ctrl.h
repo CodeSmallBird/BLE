@@ -13,6 +13,8 @@
 #include"app_timer.h"
 #include"app_gpiote.h"
 #include"ble_service.h"
+
+
 #if 0
 #define BAT_ADC_REF_VOLTAGE_IN_MILLIVOLTS        1200                                      /**< Reference voltage (in milli volts) used by ADC while doing conversion. */
 
@@ -78,6 +80,7 @@ typedef struct
 	uint16_t ctrl_delay;
 	uint8_t detec_time;
 	uint16_t voltage;
+	uint16_t cmp_voltage;
 }POWER_CTRL;
 
 extern POWER_CTRL power_ctrl;
@@ -91,8 +94,22 @@ typedef struct
 	unsigned char 	Compara;
 	unsigned char 	Result;
 }DETECT_BUFF;
-extern DETECT_BUFF detect_buff;
+extern DETECT_BUFF detect_buff_charge;
 
+enum
+{
+	BATTERY_DISCHARGING,		//·Åµç
+	BATTERY_CHARGING,		    //³äµç
+
+};
+
+enum
+{
+	BATTERY_LEVER1,
+	BATTERY_LEVER2,
+	BATTERY_LEVER3,
+	BATTERY_LEVER4,
+};
 
 
 extern void power_ctrl_init(void);

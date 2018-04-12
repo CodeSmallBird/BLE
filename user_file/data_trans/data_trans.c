@@ -95,29 +95,20 @@ U8 UartPopReceiveByte(U8 *Data)
 	return Result;
 }
 
-/*-----------------------------------------------------------------------------------------------------*/
-/*-----------------------------------------------------------------------------------------------------*/
-/*-----------------------------------------------------------------------------------------------------*/
-/*-----------------------------------------------------------------------------------------------------*/
 
-void ProRevcData(U8 *CmdData)
-{
 
-}
+
 
 /*-----------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------*/
-///void trans_help_to_app()
-
-
-
 void UartPolling(void)
 {
 	U8 Data;
+	static U8 len = 0;
 	
-#if defined(__DEBUG_Protocol)
+#if 0//defined(__DEBUG_Protocol)
 	{
 		U8 i;
 		if(Uart.Rece.Length>0)
@@ -132,7 +123,59 @@ void UartPolling(void)
 #endif
 	while(UartPopReceiveByte(&Data))
 	{
+		switch(GET_UART_STATE)
+		{
+			case HEAD_BYTE_1:
+				memset(&trans_data.help_to_app,0,sizeof(trans_data.help_to_app));
+				if(Data == 0x55)
+				{
+					trans_data.help_to_app.data[trans_data.help_to_app.length++] = Data;
+					SET_UART_STATE(HEAD_BYTE_2);
+				}
+				break;
+			case HEAD_BYTE_2:
+				if(Data == 0xAA)
+				{
+					trans_data.help_to_app.data[trans_data.help_to_app.length++] = Data;
+					SET_UART_STATE(DATA_LEN);
+				}
+				else
+					SET_UART_STATE(HEAD_BYTE_1);
+				break;
+			case DATA_LEN:
+				trans_data.help_to_app.data[trans_data.help_to_app.length++] = Data;
+				len = Data;
+				SET_UART_STATE(DATA_DEAL);
+				break;
+			case DATA_DEAL:
+				if(len)
+				{
+					len--;
+					trans_data.help_to_app.data[trans_data.help_to_app.length++] = Data;
+					if(len == 0)
+					{
+						SET_UART_STATE(TREAIN_CHECK);
+					}
+				}
+				else
+				{
+						SET_UART_STATE(HEAD_BYTE_1);
+				}
+				break;
+			case TREAIN_CHECK:
+				trans_data.help_to_app.data[trans_data.help_to_app.length++] = Data;
+				SET_UART_STATE(TRAIN_END);
+				break;
+			case TRAIN_END:
+				trans_data.help_to_app.data[trans_data.help_to_app.length++] = Data;
+				//发送数据到APP
+				send_data_to_phone();
+				SET_UART_STATE(HEAD_BYTE_1);
+				break;
+			default:
+				break;
 
+		}
 	}
 }
 
@@ -150,7 +193,30 @@ void ProtocolSend(void)
 	
 }
 
+/*-----------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------*/
 
+void AppToHelpDataTran(uint8_t* p_buff,uint8_t len)
+{
+	if((p_buff[0] == 0x55)&&(p_buff[1] == 0xAA))
+	{
+		memcpy(trans_data.app_to_help.data,p_buff,len);
+		trans_data.app_to_help.length = len;
+		ProtocolSend();
+	}
+}
+/*-----------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------*/
+
+void DataTrainsInit(void)
+{
+	UartInit();
+}
+
+void DataTrainsPolling(void)
+{
+	UartPolling();
+}
 
 
 

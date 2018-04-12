@@ -29,18 +29,20 @@ int main(void)
 {
 	for(uint8_t num = 0; num< 32 ; num++) 
 	DISABLE_PIN_FN(num);
-#if defined(DEBUG_RUN)
+#if 1//defined(DEBUG_RUN)
 	simple_uart_config(BLE_TX,BLE_RX,false);
 #endif
 	BleInit(); 
 	power_ctrl_init();
-#if defined(DEBUG_RUN)
+	DataTrainsInit();
+#if 1//defined(DEBUG_RUN)
 	printf("Sys_init_Ok\r\n");
 #endif
 	for(;;)
 	{
 		power_manage();
 		power_ctrl_polling();
+		DataTrainsPolling();
 	}
 }
 

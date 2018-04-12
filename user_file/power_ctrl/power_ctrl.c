@@ -1,10 +1,23 @@
 #include "power_ctrl.h"
 
 POWER_CTRL power_ctrl;
-DETECT_BUFF detect_buff;
+DETECT_BUFF detect_buff_charge;
 
 #define APP_GPIOTE_MAX_USERS            1     /**< Maximum number of users of the GPIOTE handler. */
 #define BUTTON_DETECTION_DELAY             APP_TIMER_TICKS(5, APP_TIMER_PRESCALER)   /**< Delay from a GPIOTE event until a button is reported as pushed (in number of timer ticks). */
+
+#define LEVEL_LEN    4
+const uint16_t charging_level[LEVEL_LEN]=
+{
+	27000,30000,34000,38000
+};
+
+const uint16_t discharging_level[LEVEL_LEN]=
+{
+	27000,30000,34000,38000
+};
+
+
 
 static void gpiote_init(void)
 {
@@ -160,14 +173,12 @@ uint16_t battery_level_transform(void)
 #endif
 }
 //mv
-#define BATTERY_LEVER0          5000
-#define BATTERY_LEVER1   		27000
-#define BATTERY_LEVER2   		30000
-#define BATTERY_LEVER3   		34000
-#define BATTERY_LEVER4 38000
+
 
 void BatteryLedDispPoll(void)
 {
+	static uint8_t battery_state = BATTERY_DISCHARGING;
+	uint16_t lever_valuse[LEVEL_LEN];
 
 	if(power_ctrl.detec_time>10)	//4
 	{
@@ -183,25 +194,56 @@ void BatteryLedDispPoll(void)
 	POW_LED4_OFF;
 	if(power_ctrl.sys_state == 0)
 		return;
-	if(power_ctrl.voltage > BATTERY_LEVER4)
+
+
+
+	if((detect_buff_charge.Result)&&(battery_state != BATTERY_CHARGING))
+	{
+		battery_state = BATTERY_CHARGING;
+		memcpy(lever_valuse,discharging_level,LEVEL_LEN);
+		power_ctrl.cmp_voltage = power_ctrl.voltage;
+	}
+	else if(battery_state != BATTERY_DISCHARGING)
+	{
+		battery_state = BATTERY_DISCHARGING;
+		memcpy(lever_valuse,discharging_level,LEVEL_LEN);
+		power_ctrl.cmp_voltage = power_ctrl.voltage;
+	}
+
+	if(battery_state == BATTERY_CHARGING)
+	{
+		if(power_ctrl.cmp_voltage < power_ctrl.voltage)
+		{
+			power_ctrl.cmp_voltage = power_ctrl.voltage;
+		}
+	}
+	else if(battery_state == BATTERY_DISCHARGING)
+	{
+		if(power_ctrl.cmp_voltage > power_ctrl.voltage)
+		{
+			power_ctrl.cmp_voltage = power_ctrl.voltage;
+		}
+	}
+	
+	if(power_ctrl.cmp_voltage > lever_valuse[BATTERY_LEVER4])
 	{
 		POW_LED1_ON;
 		POW_LED2_ON;
 		POW_LED3_ON;
 		POW_LED4_ON;
 	}
-	else if(power_ctrl.voltage>BATTERY_LEVER3)
+	else if(power_ctrl.cmp_voltage>lever_valuse[BATTERY_LEVER3])
 	{
 		POW_LED1_ON;
 		POW_LED2_ON;
 		POW_LED3_ON;
 	}
-	else if(power_ctrl.voltage>BATTERY_LEVER2)
+	else if(power_ctrl.cmp_voltage>lever_valuse[BATTERY_LEVER2])
 	{
 		POW_LED1_ON;
 		POW_LED2_ON;
 	}
-	else if(power_ctrl.voltage>BATTERY_LEVER1)
+	else if(power_ctrl.cmp_voltage>lever_valuse[BATTERY_LEVER1])
 	{
 		POW_LED1_ON;
 	}
@@ -294,24 +336,6 @@ void power_param_init(void)
 	memset(&power_ctrl,0,sizeof(power_ctrl));
 }
 
-void power_ctrl_init(void)
-{
-	power_ctrl_pin_init();
-	key_display_init();
-	power_param_init();
-}
-
-
-
-void power_ctrl_polling(void)
-{
-	PowerOnCtrlPoll();
-	PowerOffCtrlPoll();
-	BatteryLedDispPoll();
-}
-
-
-
 void InitSamp(DETECT_BUFF    *Samp, U8 State)
 {
 	Samp->Time = 100;
@@ -345,18 +369,35 @@ U8 DetectSamp(DETECT_BUFF      *Samp, U8 State)
 
 void DetecInit(void)
 {
-	memset(&detect_buff,0,sizeof(detect_buff));
-	InitSamp(&detect_buff,GET_CHARGE_DET_STATE);
+	memset(&detect_buff_charge,0,sizeof(detect_buff_charge));
+	InitSamp(&detect_buff_charge,GET_CHARGE_DET_STATE);
 }
 
 
 void DetectPoll(void)
 {
-	DetectSamp(&detect_buff,GET_CHARGE_DET_STATE);
+	DetectSamp(&detect_buff_charge,GET_CHARGE_DET_STATE);
 }
 
 
 
+void power_ctrl_init(void)
+{
+	power_ctrl_pin_init();
+	key_display_init();
+	power_param_init();
+	DetecInit();
+}
+
+
+
+void power_ctrl_polling(void)
+{
+	PowerOnCtrlPoll();
+	PowerOffCtrlPoll();
+	BatteryLedDispPoll();
+	DetectPoll();
+}
 
 
 
