@@ -1,0 +1,349 @@
+随机68个字符串+12个MAC地址字符串 
+//字符串格式
+scret_key[]={W, k, b, $, S, A, V, D, s, M, 
+						 h, ^, w, /, J, T, E, U, 8, \, 
+						 S, u, h, j, M, ;, h, 0, i, !, 
+						 t, n, ;, m, V, V, O, G, 6, H, 
+						 I, s, V, 8, 1, w, \, 2, !, !, 
+						 ~, 2, a, w, l, \, S, C, ~, :, 
+						 C, U, J, B, 7, M, $, 2, 6, 4, 
+						 8, f, 0, 4, 4, e, 6, b, f, 2
+						 } 
+
+//16进制
+scret_key[]={0x57, 0x6b, 0x62, 0x24, 0x53, 0x41, 0x56, 0x44, 0x73, 0x4d, 
+						 0x68, 0x5e, 0x77, 0x2f, 0x4a, 0x54, 0x45, 0x55, 0x38, 0x5c, 
+						 0x53, 0x75, 0x68, 0x6a, 0x4d, 0x3b, 0x68, 0x30, 0x69, 0x21, 
+						 0x74, 0x6e, 0x3b, 0x6d, 0x56, 0x56, 0x4f, 0x47, 0x36, 0x48, 
+						 0x49, 0x73, 0x56, 0x38, 0x31, 0x77, 0x5c, 0x32, 0x21, 0x21, 
+						 0x7e, 0x32, 0x61, 0x77, 0x6c, 0x5c, 0x53, 0x43, 0x7e, 0x3a, 
+						 0x43, 0x55, 0x4a, 0x42, 0x37, 0x4d, 0x24, 0x32, 0x36, 0x34, 
+						 0x38, 0x66, 0x30, 0x34, 0x34, 0x65, 0x36, 0x62, 0x66, 0x32, 
+						 }
+
+锁密钥 --- 0x36, 0x34, 0x38, 0x66, 0x30, 0x34, 0x34, 0x65, 0x36, 0x62, 0x66, 0x32, 0x00, 0x00, 0x00, 0x00 
+						 
+锁编码    mac_addr:648f044e6
+ 						 
+锁MAC    mac_addr:648f044e6bf2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app---to--lock
+0xae
+
+0xf1 
+0x4b 
+0x94 
+0x9b 
+0xb0 
+0x2a 
+0xc4 
+0xb7 
+0xd5 
+0x27 
+0xf7 
+0xbd 
+0xc0 
+0x1d 
+0xca 
+0xf2 
+
+
+
+
+
+p_buff[16] 0xf1 
+p_buff[17] 0x4b 
+p_buff[18] 0x94 
+p_buff[0] 0x9b 
+p_buff[1] 0xb0 
+p_buff[2] 0x2a 
+p_buff[3] 0xc4 
+p_buff[4] 0xb7 
+p_buff[5] 0xd5 
+p_buff[6] 0x27 
+p_buff[7] 0xf7 
+p_buff[8] 0xbd 
+p_buff[9] 0xc0 
+p_buff[10] 0x1d 
+p_buff[11] 0xca 
+p_buff[12] 0xf2 
+
+
+p_buff[16] 0xf1 
+p_buff[17] 0x4b 
+p_buff[18] 0x94 
+p_buff[0] 0x9b 
+p_buff[1] 0xb0 
+p_buff[2] 0x2a 
+p_buff[3] 0xc4 
+p_buff[4] 0xb7 
+p_buff[5] 0xd5 
+p_buff[6] 0x27 
+p_buff[7] 0xf7 
+p_buff[8] 0xbd 
+p_buff[9] 0xc0 
+p_buff[10] 0x1d 
+p_buff[11] 0xca 
+p_buff[12] 0xf2 
+
+
+
+
+send--
+send_buf[8]=0x21
+send_buf[9]=0x2f
+send_buf[10]=0x30
+send_buf[11]=0x6c
+send_buf[12]=0x69
+send_buf[13]=0x5f
+send_buf[14]=0x7e
+send_buf[15]=0x6c
+send_buf[16]=0x45
+send_buf[17]=0x45
+send_buf[18]=0x54
+send_buf[19]=0x3a
+send_buf[20]=0x6b
+send_buf[21]=0x33
+send_buf[22]=0x2c
+send_buf[23]=0x50
+
+key---"7890123456789012"
+reciv
+p_buff[16] 0x1f 
+p_buff[17] 0x10 
+p_buff[18] 0x69 
+p_buff[0] 0x40 
+p_buff[1] 0x2c 
+p_buff[2] 0xf9 
+p_buff[3] 0x0a 
+p_buff[4] 0xe6 
+p_buff[5] 0x1f 
+p_buff[6] 0x4d 
+p_buff[7] 0x44 
+p_buff[8] 0x6a 
+p_buff[9] 0x7f 
+p_buff[10] 0xe3 
+p_buff[11] 0x01 
+p_buff[12] 0x24 
+
+
+
+
+
+///////////
+需加密数据
+send_buf[8]=0x30
+send_buf[9]=0x31
+send_buf[10]=0x32
+send_buf[11]=0x33
+send_buf[12]=0x34
+send_buf[13]=0x35
+send_buf[14]=0x30
+send_buf[15]=0x31
+send_buf[16]=0x32
+send_buf[17]=0x33
+send_buf[18]=0x34
+send_buf[19]=0x35
+
+send_buf[20]=0x36
+send_buf[21]=0x37
+send_buf[22]=0x38
+send_buf[23]=0x39
+
+
+
+key_code---'7890123456789012'
+
+app加密后数据
+p_buff[16] 0x2c 
+p_buff[17] 0xc1 
+p_buff[18] 0x4c 
+p_buff[0] 0xe5 
+p_buff[1] 0xad 
+p_buff[2] 0x3a 
+p_buff[3] 0xf7 
+p_buff[4] 0x32 
+p_buff[5] 0x94 
+p_buff[6] 0x13 
+p_buff[7] 0x52 
+p_buff[8] 0x87 
+p_buff[9] 0x4b 
+p_buff[10] 0x97 
+p_buff[11] 0x05 
+p_buff[12] 0x11 
+
+
+#if 0
+#if 0
+{
+	uint8_t input[16] = {"7890123456789012"},i;
+#if 0
+	uint8_t key_code_set[16] = {0x23,0x40,0x56,0x73,0x41,0x68,0x34,0x65
+							   ,0x5B,0x58,0x22,0x31,0x31,0x50,0x76,0x41
+								};
+#else
+#if 0
+	uint8_t key_code_set[16] = {0x30,0x31,0x32,0x33,0x34,0x35,0x36,0x37
+							   ,0x38,0x39,0x30,0x31,0x32,0x33,0x34,0x35
+								};
+#else
+	uint8_t key_code_set[] = {"lK234Xn1234oP781"};
+#endif
+#endif
+	uint8_t eas_code3[] = {0x8E,0xAB,0xF1,0x55,0x95,0x13,0xB0,0x69,
+				 0xA6,0x0C,0xD1,0xA9,0x34,0xC0,0x6E,0x9C};
+	uint8_t eas_code2[16]={0};
+	for(i=0;i<16;i++)
+		//printf("%c\r\n",key_code_set[i]);
+	AES_ECB_encrypt(key_code_set, (const uint8_t*)input, eas_code2, 16);
+	for(i=0;i<16;i++)
+		//printf("eas_code2--[%d]=%x \r\n",i,eas_code2[i]);
+	//printf("\r\n\r\n");
+
+		for(i=0;i<16;i++)
+		//printf("[%d]=%c \r\n",i,eas_code3[i]);
+	//printf("\r\n\r\n");
+	AES_ECB_decrypt(eas_code3, (const uint8_t*)input, key_code_set, 16);
+	for(i=0;i<16;i++)
+		//printf("[%d]=%c \r\n",i,key_code_set[i]);
+
+}
+#else
+{
+	aes_context ctx;
+
+	
+//	int aes_encrypt_block(aes_context *ctx, uint8_t cipher_text[16], const uint8_t text[16]);
+//	int aes_decrypt_block(aes_context *ctx, uint8_t text[16], const uint8_t cipher_text[16]);
+
+
+
+	uint8_t input[32] = {"7890123456789012"},i;
+
+	//加密的数据
+//	uint8_t key_code_set[16] = {0x23,0x40,0x56,0x73,0x41,0x68,0x34,0x65
+//							   ,0x5B,0x58,0x22,0x31,0x31,0x50,0x76,0x41
+//								};
+	uint8_t key_code_set[16] = {0x30,0x31,0x32,0x33,0x34,0x35,0x30,0x31
+							   ,0x32,0x33,0x34,0x35,0x36,0x37,0x38,0x39
+								};
+
+	//解密的数据					
+	uint8_t eas_code3[] = {0x8E,0xAB,0xF1,0x55,0x95,0x13,0xB0,0x69,
+				 0xA6,0x0C,0xD1,0xA9,0x34,0xC0,0x6E,0x9C};
+	
+	uint8_t eas_code2[16]={0};
+
+
+	aes_set_key(&ctx, input,  128);
+
+
+	aes_encrypt_block(&ctx,  eas_code2,key_code_set);
+
+	
+	for(i=0;i<16;i++)
+		//printf("key_code_set:%c\r\n",key_code_set[i]);
+	//AES_ECB_encrypt(key_code_set, (const uint8_t*)input, eas_code2, 16);
+	for(i=0;i<16;i++)
+		//printf("eas_code2--[%d]=%x\r\n",i,eas_code2[i]);
+	//printf("\r\n\r\n");
+
+		for(i=0;i<16;i++)
+		//printf("eas_code3--[%d]=%c \r\n",i,eas_code3[i]);
+	//printf("\r\n\r\n");
+	//AES_ECB_decrypt(eas_code3, (const uint8_t*)input, key_code_set, 16);
+	for(i=0;i<16;i++)
+		//printf("[%d]=%c \r\n",i,key_code_set[i]);
+
+
+
+}
+#endif
+#endif
+Wkb0AVDsMhs5TEU8quhj
+MP0i5nOVVOG6HIsV81wl
+63awlyC9CUJB7M305776
+Wf0mB4kz648f044e6bf2
+
+send---app
+[8]=75
+[9]=78
+[10]=78
+[11]=30
+[12]=70
+[13]=6b
+[14]=57
+[15]=31
+[16]=67
+[17]=7a
+[18]=31
+[19]=37
+[20]=46
+[21]=4c
+[22]=6d
+[23]=61
+
+0--97---23
+12--c5 
+13--44 
+14--1f 
+15--99 
+16--e9 
+17--2f 
+18--e3 
+19--53 
+20--56 
+21--ab 
+22--bf 
+23--d7 
+24--71 
+25--88 
+26--5b 
+27--71 
+
+加密原文--
+30587B5344385531262A6F577A305935
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
