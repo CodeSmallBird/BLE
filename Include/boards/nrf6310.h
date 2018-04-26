@@ -28,7 +28,7 @@
 #if defined(ADD_NRF_PWM_CTRL)
 #define CHANGE_MODE_CTRL	//	更改模式控制
 
-#define CTRL_POWER_OUT	//控制输出电压
+//#define CTRL_POWER_OUT	//控制输出电压
 #endif
 
 #if defined(CHANG_RED_LED_WORK)

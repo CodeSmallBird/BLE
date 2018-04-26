@@ -872,8 +872,6 @@ void BleInit(void)
 	sprintf((char*)device_name,"XMLY%02x%02x%02x",mac_addr.addr[0],mac_addr.addr[1],mac_addr.addr[2]);
 #endif
 
-
-
 	#if defined(FLASH_READ_WRITE)
 		falsh_read();
 	#endif

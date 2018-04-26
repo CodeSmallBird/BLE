@@ -66,6 +66,7 @@ void pwm_gpiote_init(void)  //io输出
 void timer2_init(void) 
 {
     // 设置16m时钟
+	#if 1
     NRF_CLOCK->EVENTS_HFCLKSTARTED = 0;
     NRF_CLOCK->TASKS_HFCLKSTART    = 1;
 
@@ -74,7 +75,15 @@ void timer2_init(void)
     {
         //Do nothing.
     }
-
+	#else
+		NRF_CLOCK->EVENTS_HFCLKSTARTED=0;  
+    NRF_CLOCK->TASKS_HFCLKSTART=1;  
+   // while(NRF_CLOCK->EVENTS_HFCLKSTARTED==0) 
+		{
+        //Do nothing.
+    }	
+	#endif
+		
     NRF_TIMER2->MODE      = TIMER_MODE_MODE_Timer;
     NRF_TIMER2->BITMODE   = TIMER_BITMODE_BITMODE_16Bit << TIMER_BITMODE_BITMODE_Pos;
     NRF_TIMER2->PRESCALER = TIMER_PRESCALERS;
@@ -104,7 +113,7 @@ void timer2_init(void)
 */
 //1个step_tick 1.92ms
 //
-
+#define SHAKE_PERIOD   1563 //3s
 
 void TIMER2_IRQHandler(void) //timer2中断函数
 {
@@ -112,21 +121,21 @@ void TIMER2_IRQHandler(void) //timer2中断函数
 	static uint32_t step_tick = 0;
 #if defined(CTRL_POWER_OUT)
 	static uint32_t temp_pwm_duty = 0;
-	if(pwm_duty == 1)
+	if(pwm_duty >= 2)
 	{
 		if(step_tick>=pwm_work.work_time){
-			uint32_t period = (1563 - pwm_work.work_time)/2;
+			uint32_t period = (SHAKE_PERIOD - pwm_work.work_time)/2;
 			if(step_tick < (period+pwm_work.work_time)){
 				
-				temp_pwm_duty = (step_tick - pwm_work.work_time)*3/period;
+				temp_pwm_duty = (step_tick - pwm_work.work_time)*pwm_duty/2/period;
 				
-			}else if(temp_pwm_duty > (period+pwm_work.work_time)){
+			}else if(step_tick > (period+pwm_work.work_time)){
 			
-				temp_pwm_duty =6 - (step_tick - pwm_work.work_time - period )*3/period;
+				temp_pwm_duty =pwm_duty - (step_tick - pwm_work.work_time - period )*pwm_duty/2/period;
 			}
 
-			if(temp_pwm_duty > 6)
-				temp_pwm_duty = 6;
+			if(temp_pwm_duty > pwm_duty)
+				temp_pwm_duty = pwm_duty;
 				
 		}else{
 			temp_pwm_duty = pwm_duty;
@@ -170,7 +179,7 @@ void TIMER2_IRQHandler(void) //timer2中断函数
 			cnt = 0;
 			step_tick++;
 			//if(step_tick>pwm_work.stop_time)
-			if(step_tick>1563)		//3s
+			if(step_tick>SHAKE_PERIOD)		//3s
 				step_tick = 0;
 		 }
     }
