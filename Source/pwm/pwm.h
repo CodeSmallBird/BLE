@@ -52,8 +52,7 @@ time2 比较通道 0,1,2的配置
 #define PPI_CH_OUT_GPIOTE_CH_2             2		// 在I2C中用了0，所以这里选择gtioe选择通道1
 
 
-#define MAX_SAMPLE_LEVELS        10          //1400			// PWM周期
-#define DUTY_SAMPLE_LEVELS              10            			// pwm 占空比 
+#define MAX_SAMPLE_LEVELS                30//     		10//10          //1400			// PWM周期
 #define TIMER_PRESCALERS                8
 
 
@@ -97,11 +96,20 @@ enum
 	PWM_MODE_6,
 };
 
+
+typedef struct{
+	int direction ;
+	int temp_pwm ;
+	int temp_pwm_duty ;
+	int cnt;
+}PWM_PARA_INFOR;
+
 typedef struct
 {
 	uint32_t work_time;
 	uint32_t stop_time;
 	uint32_t work_state;
+	PWM_PARA_INFOR para_infor;
 }PWM_WORK;
 
 extern PWM_WORK pwm_work;

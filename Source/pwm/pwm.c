@@ -113,45 +113,18 @@ void timer2_init(void)
 */
 //1个step_tick 1.92ms
 //
-#define SHAKE_PERIOD   1563 //3s
+
+static const uint32_t temp_pwm_period[31] = {
+	 25,30,29,29,28,28,28,27,27,26
+	,26,25,25,24,24,20,20,19,19,18
+	,18,17,17,16,15,14,13,12,10,9,9
+};
+
 
 void TIMER2_IRQHandler(void) //timer2中断函数
 {
-	static uint32_t cnt = 0;
-	static uint32_t step_tick = 0;
-#if defined(CTRL_POWER_OUT)
-	static uint32_t temp_pwm_duty = 0;
-	if(pwm_duty >= 2)
-	{
-		if(step_tick>=pwm_work.work_time){
-			uint32_t period = (SHAKE_PERIOD - pwm_work.work_time)/2;
-			if(step_tick < (period+pwm_work.work_time)){
-				
-				temp_pwm_duty = (step_tick - pwm_work.work_time)*pwm_duty/2/period;
-				
-			}else if(step_tick > (period+pwm_work.work_time)){
-			
-				temp_pwm_duty =pwm_duty - (step_tick - pwm_work.work_time - period )*pwm_duty/2/period;
-			}
 
-			if(temp_pwm_duty > pwm_duty)
-				temp_pwm_duty = pwm_duty;
-				
-		}else{
-			temp_pwm_duty = pwm_duty;
-		}
-	}
-	else
-	{
-		temp_pwm_duty = pwm_duty;
-	}
-#endif
-
-#if defined(CTRL_POWER_OUT)
-	uint32_t next_sample = (7-temp_pwm_duty)*MAX_SAMPLE_LEVELS/8;//DUTY_SAMPLE_LEVELS;
-#else
-     uint32_t next_sample = (7-pwm_duty)*MAX_SAMPLE_LEVELS/8;//DUTY_SAMPLE_LEVELS;
-#endif
+	uint32_t next_sample = (30-pwm_work.para_infor.temp_pwm_duty)*MAX_SAMPLE_LEVELS/30;
     if ((NRF_TIMER2->EVENTS_COMPARE[PPI_CH_IN_CMP_1] != 0) && 
        ((NRF_TIMER2->INTENSET & TIMER_INTENSET_COMPARE1_Msk) != 0))
     {
@@ -159,29 +132,36 @@ void TIMER2_IRQHandler(void) //timer2中断函数
         NRF_TIMER2->EVENTS_COMPARE[PPI_CH_IN_CMP_1] = 0;
         NRF_TIMER2->CC[PPI_CH_IN_CMP_1]             = MAX_SAMPLE_LEVELS;
 		
-		 if(cnt< next_sample)
+		pwm_work.para_infor.cnt++;
+		 if(pwm_work.para_infor.cnt< next_sample)
 		 {
 			 close_pwm_pin();
-			 cnt++;
 		 }
-		 else if(cnt<= MAX_SAMPLE_LEVELS)
+		 else if(pwm_work.para_infor.cnt<= MAX_SAMPLE_LEVELS)
 		{
-			if(step_tick>pwm_work.work_time)	//
-			{
-				open_pwm_pin();
-			}
-			cnt++;
+			open_pwm_pin();
 		}
-		 else
-		 {
-		 
+		else
+		{
 			close_pwm_pin();
-			cnt = 0;
-			step_tick++;
-			//if(step_tick>pwm_work.stop_time)
-			if(step_tick>SHAKE_PERIOD)		//3s
-				step_tick = 0;
-		 }
+			pwm_work.para_infor.cnt = 0;
+			pwm_work.para_infor.temp_pwm++;
+			if(pwm_work.para_infor.temp_pwm >temp_pwm_period[pwm_work.para_infor.temp_pwm_duty])
+			{
+				pwm_work.para_infor.temp_pwm = 0;
+				pwm_work.para_infor.temp_pwm_duty += pwm_work.para_infor.direction;
+				if(pwm_work.para_infor.temp_pwm_duty>28)
+				{
+					pwm_work.para_infor.direction = -1;
+					
+				}
+				else if(pwm_work.para_infor.temp_pwm_duty < 1)
+				{
+					pwm_work.para_infor.direction = 1;
+				}
+					
+			}
+		}
     }
 	
 }
@@ -190,9 +170,17 @@ void TIMER2_IRQHandler(void) //timer2中断函数
 void pwm_base_init(void)
 {
 	memset(&pwm_work,0,sizeof(pwm_work));
+	pwm_work.para_infor.direction = 1;
 	pwm_gpiote_init();	
 	timer2_init(); 
 }
+
+void pwm_infor_rest(void){
+
+	memset(&pwm_work.para_infor,0,sizeof(pwm_work.para_infor));
+	pwm_work.para_infor.direction = 1;
+}
+
 void pwm_ctrl(uint8_t ctrl)
 {
 	pwm_state = ctrl;
@@ -273,6 +261,7 @@ void set_pwm_start_stop_time(uint8_t work_mode)
 	}
 	pwm_ctrl(PWM_TRUE);
 	pwm_work.work_time = (stop_tick)*521/10;
+	pwm_infor_rest();
 #endif
 }
 
